@@ -1,0 +1,85 @@
+Route;Code;String
+Groningen - Rotterdam C;500;Gn,Gerp,Hrn,Asn,Bl,Hgv,Mp,Zl,Wz,Hde,Ns,Hd,Eml,Pt,Nkk,Avat,Amfs,Amf,Dld,Bhv,Uto,Ut,Utlr,Utt,Vtn,Wd,Gdg,Gd,Nwk,Cps,Rta,Rtn,Rtd
+Leeuwarden - Rotterdam C;600;Lw,Gw,Akm,Hr,Wv,Swk,Mp,Zl,Wz,Hde,Ns,Hd,Eml,Pt,Nkk,Avat,Amfs,Amf,Dld,Bhv,Uto,Ut,Utlr,Utt,Vtn,Wd,Gdg,Gd,Nwk,Cps,Rta,Rtn,Rtd
+Groningen - Den Haag C;700;Gn,Gerp,Hrn,Asn,Bl,Hgv,Mp,Zl,Kpnz,Dron,Lls,Almo,Almb,Almp,Alm,Almm,Ampo,Wp,Dmnz,Dvd,Rai,Asdz,Shl,Hfd,Nvp,Ssh,Ledn,Dvnk,Vst,Gvm,Laa,Gvc
+Den Helder - Maastricht;800;Hdr,Hdrz,Ana,Sgn,Hwd,Amrn,Amr,Hlo,Cas,Utg,Kma,Wm,Zzs,Kz,Zd,Ass,Asd,Asdm,Asa,Dvd,Asb,Ac,Bkl,Mas,Utz,Ut,Utvr,Utl,Htn,Htnc,Cl,Gdm,Zbm,Ht,Vg,Btl,Bet,Ehs,Ehv,Gp,Hze,Mz,Wt,Rm,Ec,Srn,Std,Lut,Bk,Bde,Mt
+Amsterdam C - Breda;900;Asd,Ass,Asdl,Shl,Hfd,Rtd,Rtb,Rtz,Rtst,Rlb,Bdpb,Bd
+Amsterdam - Rotterdam via HSL;1000;Asd,Ass,Asdl,Shl,Hfd,Rtd
+Den Haag C - Eindhoven;1100;Gvc,Gv,Gvmw,Rsw,Dt,Dtcp,Sdm,Rtd,Rtb,Rtz,Rtst,Rlb,Bdpb,Bd,Gz,Tbr,Tbu,Tb,Ot,Btl,Bet,Ehs,Ehv
+Amsterdam - Deventer;1500;Asd,Asdm,Assp,Dmn,Wp,Ndb,Bsmz,Hvsm,Hvs,Brn,Amf,Hvl,Apd,Apdo,Twl,Dv
+Enschede - Schiphol;1600;Es,Esk,Hgl,Bn,Amri,Aml,Wdn,Rsn,Hon,Dvc,Dv,Twl,Apdo,Apd,Hvl,Amf,Brn,Hvs,Hvsm,Bsmz,Ndb,Wp,Dmnz,Dvd,Rai,Asdz,Shl
+Enschede - Den Haag;1700;Es,Esk,Hgl,Bn,Amri,Aml,Wdn,Rsn,Hon,Dvc,Dv,Twl,Apdo,Apd,Hvl,Amf,Dld,Bhv,Uto,Ut,Utlr,Utt,Vtn,Wd,Gdg,Gd,Llzm,Ztmo,Ztm,Ypb,Vb,Gvc
+Leeuwarden - Den Haag;1800;Lw,Gw,Akm,Hr,Wv,Swk,Mp,Zl,Kpnz,Dron,Lls,Almo,Almb,Almp,Alm,Almm,Ampo,Wp,Dmnz,Dvd,Rai,Asdz,Shl,Hfd,Nvp,Ssh,Ledn,Dvnk,Vst,Gvm,Laa,Gvc
+Utrecht - Den Haag;2000;Ut,Utlr,Utt,Vtn,Wd,Gdg,Gd,Llzm,Ztmo,Ztm,Ypb,Vb,Gvc
+Den Haag - Amsterdam;2100;Gvc,Laa,Gvm,Vst,Dvnk,Ledn,Vh,Hil,Had,Hlm,Hlms,Hwzb,Ass,Asd
+Vlissingen - Amsterdam;2200;Bd,Bdpb,Lzw,Ddrz,Ddr,Zwd,Brd,Rlb,Rtst,Rtz,Rtb,Rtd,Sdm,Dtcp,Dt,Rsw,Gvmw,Gv,Laa,Gvm,Vst,Dvnk,Ledn,Vh,Hil,Had,Hlm,Hlms,Hwzb,Ass,Asd
+Vlissingen - Amsterdam (snel);2300;Bd,Bdpb,Lzw,Ddrz,Ddr,Zwd,Brd,Rlb,Rtst,Rtz,Rtb,Rtd,Sdm,Dtcp,Dt,Rsw,Gvmw,Gv,Laa,Gvm,Vst,Dvnk,Ledn,Vh,Hil,Had,Hlm,Hlms,Hwzb,Ass,Asd
+Lelystad - Dordrecht;2400;Lls,Almo,Almb,Almp,Alm,Almm,Ampo,Wp,Dmnz,Dvd,Rai,Asdz,Shl,Hfd,Nvp,Ssh,Ledn,Dvnk,Vst,Gvm,Laa,Gv,Gvmw,Rsw,Dt,Dtcp,Sdm,Rtd,Rtb,Rtz,Rtst,Rlb,Brd,Zwd,Ddr
+Almere C - Amsterdam C;2600;Alm,Almm,Ampo,Wp,Dmn,Assp,Asdm,Asd
+Utrecht C - Rotterdam C;2800;Ut,Utlr,Utt,Vtn,Wd,Gdg,Gd,Nwk,Cps,Rta,Rtn,Rtd
+Enkhuizen - Maastricht;2900;Ekz,Bkf,Bkg,Hks,Hnk,Hn,Pmo,Pm,Pmw,Zdk,Zd,Ass,Asd,Asdm,Asa,Dvd,Asb,Ac,Bkl,Mas,Utz,Ut,Utvr,Utl,Htn,Htnc,Cl,Gdm,Zbm,Ht,Vg,Btl,Bet,Ehs,Ehv,Gp,Hze,Mz,Wt,Rm,Ec,Srn,Std,Lut,Bk,Bde,Mt
+Den Helder - Nijmegen;3000;Hdr,Hdrz,Ana,Sgn,Hwd,Amrn,Amr,Hlo,Cas,Utg,Kma,Wm,Zzs,Kz,Zd,Ass,Asd,Asdm,Asa,Dvd,Asb,Ac,Bkl,Mas,Utz,Ut,Utvr,Bnk,Db,Mrn,Klp,Ed,Wf,Otb,Ah,Ahz,Est,Nml,Nm
+Schiphol - Nijmegen;3100;Shl,Asdz,Rai,Asb,Ac,Bkl,Mas,Utz,Ut,Utvr,Bnk,Db,Mrn,Klp,Ed,Wf,Otb,Ah,Ahz,Est,Nml,Nm
+Rotterdam - Schiphol - Arnhem;3200;Rtd,Sdm,Dtcp,Dt,Rsw,Gvmw,Gv,Laa,Gvm,Vst,Dvnk,Ledn,Ssh,Nvp,Hfd,Shl,Asdz,Rai,Asb,Ac,Bkl,Mas,Utz,Ut,Utvr,Bnk,Db,Mrn,Klp,Ed,Wf,Otb,Ah
+Hoorn Kers - Den Haag;3300;Hnk,Hn,Pmo,Pm,Pmw,Zdk,Zd,Ass,Asdl,Shl,Hfd,Nvp,Ssh,Ledn,Dvnk,Vst,Gvm,Laa,Gvc
+Schiphol - Venlo;3500;Shl,Asdz,Rai,Asb,Ac,Bkl,Mas,Utz,Ut,Utvr,Utl,Htn,Htnc,Cl,Gdm,Zbm,Ht,Vg,Btl,Bet,Ehs,Ehv,Hmbv,Hmh,Hm,Hmbh,Dn,Hrt,Br,Vl
+Roosendaal - Zwolle;3600;Vs,Vss,Mdb,Arn,Gs,Bzl,Krg,Kbd,Rb,Bgn,Rsd,Et,Bd,Gz,Tbr,Tbu,Tb,Ht,Hto,Rs,Ow,O,Rvs,Wc,Nmd,Nmgo,Nm,Nml,Est,Ahz,Ah,Ahp,Ahpr,Vp,Rh,Dr,Bmn,Zp,Dv,Ost,Wh,Zl
+Dordrecht - Venlo;3700;Ddr,Zwd,Brd,Rlb,Rtst,Rtz,Rtb,Rtd,Sdm,Dtcp,Dt,Rsw,Gvmw,Gv,Laa,Gvm,Vst,Dvnk,Ledn,Ssh,Nvp,Hfd,Shl,Asdz,Rai,Asb,Ac,Bkl,Mas,Utz,Ut,Utvr,Utl,Htn,Htnc,Cl,Gdm,Zbm,Ht,Vg,Btl,Bet,Ehs,Ehv,Hmbv,Hmh,Hm,Hmbh,Dn,Hrt,Br,Vl
+Enkhuizen - Heerlen;3900;Ekz,Bkf,Bkg,Hks,Hnk,Hn,Pmo,Pm,Pmw,Zdk,Zd,Ass,Asd,Asdm,Asa,Dvd,Asb,Ac,Bkl,Mas,Utz,Ut,Utvr,Utl,Htn,Htnc,Cl,Gdm,Zbm,Ht,Vg,Btl,Bet,Ehs,Ehv,Gp,Hze,Mz,Wt,Rm,Ec,Srn,Std,Gln,Sbk,Sn,Nh,Hb,Hrl
+Uitgeest - Rotterdam;4000;Utg,Kma,Wm,Zzs,Kz,Zd,Ass,Asd,Asdm,Asa,Dvd,Asb,Ac,Bkl,Wd,Gdg,Gd,Nwk,Cps,Rta,Rtn,Rtd
+Lelystad - Hoofddorp;4300;Lls,Almo,Almb,Almp,Alm,Almm,Ampo,Wp,Dmnz,Dvd,Rai,Asdz,Shl,Hfd
+Oss - Deurne;4400;O,Ow,Rs,Hto,Ht,Vg,Btl,Bet,Ehs,Ehv,Hmbv,Hmh,Hm,Hmbh,Dn
+Enkhuizen - Amsterdam (Spits);4500;Ekz,Bkf,Bkg,Hks,Hnk,Hn,Pmo,Pm,Pmw,Zdk,Zd,Ass,Asd
+Almere Oostvaarders - Den Haag;4600;Almo,Almb,Almp,Alm,Almm,Ampo,Wp,Dmnz,Dvd,Rai,Asdz,Shl,Hfd,Nvp,Ssh,Ledn,Dvnk,Vst,Gvm,Laa,Gvc
+Hoorn - Amsterdam Centraal;4800;Hn,Obd,Hwd,Amrn,Amr,Hlo,Cas,Utg,Hk,Bv,Drh,Sptn,Sptz,Bll,Hlm,Hlms,Hwzb,Ass,Asd
+Almere - Utrecht;4900;Alm,Almm,Ampo,Ndb,Bsmz,Hvsm,Hvs,Hvsp,Hor,Uto,Ut
+Dordrecht - Den Haag C;5000;Ddr,Zwd,Brd,Rlb,Rtst,Rtz,Rtb,Rtd,Sdm,Dtcp,Dt,Rsw,Gvmw,Gv,Gvc
+Dordrecht - Den Haag C;5100;Ddr,Zwd,Brd,Rlb,Rtst,Rtz,Rtb,Rtd,Sdm,Dtcp,Dt,Rsw,Gvmw,Gv,Gvc
+Dordrecht - Rotterdam C;5200;Ddr,Zwd,Brd,Rlb,Rtst,Rtz,Rtb,Rtd
+Zandvoort - Amsterdam C;5400;Zvt,Ovn,Hlm,Hlms,Hwzb,Ass,Asd
+Baarn - Utrecht C;5500;Brn,Sd,St,Stz,Dld,Bhv,Uto,Ut
+Zwolle - Utrecht C;5600;Zl,Wz,Hde,Ns,Hd,Eml,Pt,Nkk,Avat,Amfs,Amf,Dld,Bhv,Uto,Ut
+Utrecht C - Hoofddorp;5700;Ut,Uto,Hor,Hvsp,Hvs,Hvsm,Bsmz,Mdb,Wp,Dmnz,Dvd,Rai,Asdz,Shl,Hfd
+Vathorst - Hoofddorp;5800;Avat,Amfs,Amf,Brn,Hvs,Hvsm,Bsmz,Ndb,Wp,Dmnz,Dvd,Rai,Asdz,Shl,Hfd
+Roosendaal - Dordrecht;5900;Rsd,Odb,Zvb,Lzw,Ddrz,Ddr
+Utrecht C - 's-Hertogenbosch;6000;Ut,Utvr,Utl,Htn,Htnc,Cl,Gdm,Zbm,Ht
+Vlissingen - Roosendaal;6100;Vs,Vss,Mdb,Arn,Gs,Bzl,Krg,Kbd,Rb,Bgn,Rsd
+Groningen - Assen;6200;Gn,Gerp,Hrn,Asn
+Den Haag C - Haarlem;6300;Gvc,Laa,Gvm,Vst,Dvnk,Ledn,Vh,Hil,Had,Hlm
+Weert - Tilburg Uni;6400;Wt,Mz,Hze,Gp,Ehv,Ehs,Bet,Btl,Ot,Tb,Tbu
+Dordrecht - Arnhem C;6600;Ddr,Ddrz,Lzw,Bdpb,Bd,Gz,Tbr,Tbu,Tb,Ht,Hto,Rs,Ow,O,Rvs,Wc,Nmd,Nmgo,Nm,Nml,Est,Ahz,Ah
+Utrecht C - Tiel;6700;Ut,Utvr,Utl,Htn,Htnc,Cl,Gdm,Tpsw,Tl
+Gouda Goverwelle - Den Haag C;6800;Gdg,Gd,Llzm,Ztmo,Ztm,Ypb,Vb,Gvc
+Utrecht C - Den Haag C;6900;Ut,Utlr,Utt,Vtn,Wd,Gdg,Gd,Llzm,Ztmo,Ztm,Ypb,Vb,Gvc
+Enschede - Apeldoorn;7000;Es,Esk,Hgl,Bn,Amri,Aml,Wdn,Rsn,Hon,Dvc,Dv,Twl,Apdo,Apd
+Breukelen - Rhenen;7300;Bkl,Mas,Utz,Ut,Utvr,Bnk,Db,Mrn,Vndw,Vndc,Rhn
+Uitgeest - Driebergen-Zeist;7400;Utg,Kma,Wm,Zzs,Kz,Zd,Ass,Asd,Asdm,Asa,Dvd,Asb,Ac,Bkl,Mas,Utz,Ut,Utvr,Bnk,Db
+Ede-Wageningen - Arnhem C;7500;Ed,Wf,Otb,Ah
+Wijchen - Zutphen;7600;Wc,Nmd,Nmgo,Nm,Nml,Est,Ahz,Ah,Ahp,Ahpr,Vp,Rh,Dr,Bmn,Zp
+Groningen - Zwolle;8100;Gn,Gerp,Hrn,Asn,Bl,Hgv,Mp,Zl
+Leiden C - Utrecht C;8800;Ledn,Ldl,Apn,Bdg,Wd,Vtn,Utt,Utlr,Ut
+Leiden C - Utrecht C;8900;Ledn,Ldl,Apn,Bdg,Wd,Vtn,Utt,Utlr,Ut
+Leeuwarden - Lelystad C;9000;Lw,Gw,Akm,Hr,Wv,Swk,Mp,Zl,Kpnz,Dron,Lls
+Amersfoort Schothorst - Schiphol;11600;Amfs,Amf,Brn,Hvs,Hvsm,Bsmz,Ndb,Wp,Dmnz,Dvd,Rai,Asdz,Shl
+Amersfoort Schothorst - Den Haag;11700;Amfs,Amf,Dld,Bhv,Uto,Ut,Utlr,Utt,Vtn,Wd,Gdg,Gd,Llzm,Ztmo,Ztm,Ypb,Vb,Gvc
+Leiden C - Den Haag C;13300;Ledn,Dvnk,Vst,Gvm,Laa,Gvc
+Almere Utrecht;14900;Alm,Almm,Ampo,Ndb,Bsmz,Hvsm,Hvs,Hvsp,Hor,Uto,Ut
+Weert - Eindhoven;16400;Wt,Mz,Hze,Gp,Ehv
+Utrecht C - Maliebaan;28300;Ut,Uto,Utm
+Rotterdam - Amsterdam - Utrecht (Nachtnet);1400;Rtd,Sdm,Dtcp,Dt,Rsw,Gvmw,Gv,Laa,Gvm,Vst,Dvnk,Ledn,Ssh,Nvp,Hfd,Shl,Asdl,Ass,Asd,Asdm,Asa,Dvd,Asb,Ac,Bkl,Mas,Utz,Ut
+Rotterdam C - Gouda (Nachtnet);11400;Gd,Nwk,Cps,Rta,Rtn,Rtd
+Groningen - Amsterdam C;12600;Gn,Gerp,Hrn,Asn,Bl,Hgv,Mp,Zl,Kpnz,Dron,Lls,Almo,Almb,Almp,Alm,Almm,Ampo,Wp,Dmn,Assp,Asdm,Asd
+Eindhoven - Maastricht;12900;Ehv,Gp,Hze,Mz,Wt,Rm,Ec,Srn,Std,Lut,Bk,Bde,Mt
+Lelystad - Amsterdam C;14300;Lls,Almo,Almb,Almp,Alm,Almm,Ampo,Wp,Dmn,Assp,Asdm,Asd
+Eindhoven C - Deurne;14400;Ehv,Hmbv,Hmh,Hm,Hmbh,Dn
+Zandvoort - Haarlem;15400;Zvt,Ovn,Hlm
+Eindhoven - Utrecht/Rotterdam;21400;Ut,Utvr,Utl,Htn,Htnc,Cl,Gdm,Zbm,Ht,Vg,Btl,Bet,Ehs,Ehv,Rtd,Rtb,Rtz,Rtst,Rlb,Brd,Zwd,Ddr,Ddrz,Zlw,Bdpb,Bd,Gz,Tbr,Tbu,Tb,Ot,Bet,Ehs,Ehv,Ht,Tb
+Amsterdam C - Haarlem;22200;Asd,Ass,Hwzb,Hlms,Hlm
+Amsterdam - Hilversum - Utrecht;21500;Asd,Asdm,Assp,Dmn,Wp,Ndb,Bsmz,Hvsm,Hvs,Hvsp,Hor,Uto,Ut
+Utrecht - Amf;22400;Ut,Uto,Bhv,Dld,Amf
+Utrecht C - Nijmegen;23400;Ut,Utvr,Bnk,Db,Mrn,Klp,Ed,Wf,Otb,Ah,Ahz,Est,Nml,Nm
+Leiden - Amsterdam Bijlmer ArenA;24400;Ledn,Ssh,Nvp,Hfd,Shl,Asdz,Rai,Asb
+Zandvoort - Haarlem;25400;Zvt,Ovn,Hlm
+Amsterdam C - Rotterdam C;28500;Rtd,Sdm,Dtcp,Dt,Rsw,Gvmw,Gv,Laa,Gvm,Vst,Dvnk,Ledn,Ssh,Nvp,Hfd,Shl,Asdl,Ass,Asd
+Utrecht - Hilversum - Amsterdam - Schiphol;15800;Ut,Uto,Hor,Hvsp,Hvs,Hvsm,Bsmz,Mdb,Wp,Dmn,Assp,Asdm,Asd,Ass,Asdl,Shl
+Dordrecht - Breda;16600;Ddr,Ddrz,Lzw,Bdpb,Bd
