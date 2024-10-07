@@ -27,31 +27,31 @@ for i in stations:
 
 #Defining the borders of the Randstad
 border_n = 52.469165802002 #Long coord of Zaandijk Zaanse Schans
-border_o = 5.3705554008484 #Long coord of Amersfoort Central
-border_z = 51.790000915527 #Long coord of Dordrecht Zuid
+border_s = 51.790000915527 #Long coord of Dordrecht Zuid
 
-border_z2 = 51.833889007568 #Lat coord of Gorinchem
-border_zo2 = 4.9683332443237 #Long coord of Gorinchem
-border_o2 = 52.153888702393 #Lat coord of Amersfoort
+lat1 = 51.833889007568 #Lat coord of Gorinchem
+long1 = 4.9683332443237 #Long coord of Gorinchem
+lat2 = 52.153888702393 #Lat coord of Amersfoort Centraal
+long2 = 5.3705554008484 #Long coord of Amersfoort Centraal
 
-pointA = [border_z2, border_zo2]
-pointB = [border_o2, border_o]
+pointA = [lat1, long1]
+pointB = [lat2, long2]
 
-vector1 = [pointB[0] - pointA[0], pointB[1] - pointA[1]]
+vector1 = [pointB[0] - pointA[0], pointB[1] - pointA[1]] #Line between Gorinchem and Amersfoort Centraal 
 
 
 for i, row in df.iterrows():
-    coord1 = row['Lat-coord']
-    coord2 = row['Lng-coord']
+    coord1 = row['Lat-coord'] #Lat coord of station i
+    coord2 = row['Lng-coord'] #Long coord of station i
     
-    pointP = [coord1, coord2]
-    vector2 = [pointP[0] - pointA[0], pointP[1] - pointA[1]]
-    cross_product = vector1[0]*vector2[1] - vector1[1]*vector2[0]
+    pointP = [coord1, coord2] #Vector of station i
+    vector2 = [pointP[0] - pointA[0], pointP[1] - pointA[1]] 
+    cross_product = vector1[0]*vector2[1] - vector1[1]*vector2[0] 
 
 
-    if coord1 <= border_n and coord1 >= border_z and coord2 <= border_zo2 :
+    if coord1 <= border_n and coord1 >= border_s and coord2 <= long1 : #Checks for north of Dordrecht-Zuid, south of Zaandijk Zaanse Schans and west of Gorinchem
         df.loc[i, 'Randstad'] = 1
-    elif coord1 <= border_n and coord1 >= border_z and cross_product <= 0:
+    elif coord1 <= border_n and coord1 >= border_s and cross_product <= 0: #Checks for north of Dordrecht-Zuid, south of Zaandijk Zaanse Schans and west of the line between Gorinchem and Amersfoort Centraal
         df.loc[i, 'Randstad'] = 1     
     else:
         df.loc[i, 'Randstad'] = 0
