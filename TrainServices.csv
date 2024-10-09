@@ -18,7 +18,7 @@ Vlissingen - Amsterdam (snel);2300;Asd,Ass,Hwzb,Hlms,Hlm,Had,Hil,Vh,Ledn,Dvnk,Vs
 Lelystad - Dordrecht;2400;Ddr,Zwd,Brd,Rlb,Rtst,Rtz,Rtb,Rtd,Sdm,Dtcp,Dt,Rsw,Gvmw,Gv,Laa,Gvm,Vst,Dvnk,Ledn,Ssh,Nvp,Hfd,Shl,Asdz,Rai,Dvd,Dmnz,Wp,Ampo,Almm,Alm,Almp,Almb,Almo,Lls
 Almere C - Amsterdam C;2600;Alm,Almm,Ampo,Wp,Dmn,Assp,Asdm,Asd
 Utrecht C - Rotterdam C;2800;Ut,Utlr,Utt,Vtn,Wd,Gdg,Gd,Nwk,Cps,Rta,Rtn,Rtd
-Enkhuizen - Maastricht;2900;Mt,Bde,Bk,Lut,Std,Srn,Ec,Rm,Wt,Mz,Hze,Gp,Ehv,Ehs,Bet,Btl,Vg,Ht,Zbm,Gdm,Cl,Htnc,Htn,Utln,Utvr,Ut,Utzl,Mas,Bkl,Ac,Ashd,Asb,Dvd,Asa,Asdm,Asd,Ass,Zd,Zdk,Pmw,Pmr,Pmo,Hn,Hnnk,Hks,Bkg,Bkf,Ekz
+Enkhuizen - Maastricht;2900;Mt,Bde,Bk,Lut,Std,Srn,Ec,Rm,Wt,Mz,Hze,Gp,Ehv,Ehs,Bet,Btl,Vg,Ht,Zbm,Gdm,Cl,Htnc,Htn,Utln,Utvr,Ut,Utzl,Mas,Bkl,Ac,Ashd,Asb,Dvd,Asa,Asdm,Asd,Ass,Zd,Zdk,Pmw,Pmr,Pmo,Hn,Hnk,Hks,Bkg,Bkf,Ekz
 Den Helder - Nijmegen;3000;Nm,Nml,Est,Ahz,Ah,Otb,Wf,Ed,Klp,Mrn,Db,Bnk,Utvr,Ut,Utzl,Mas,Bkl,Ac,Ashd,Asb,Dvd,Asa,Asdm,Asd,Ass,Zd,Kz,Zzs,Wm,Kma,Utg,Cas,Hlo,Amr,Amrn,Hwd,Sgn,Ana,Hdrz,Hdr
 Schiphol - Nijmegen;3100;Nm,Nml,Est,Ahz,Ah,Otb,Wf,Ed,Klp,Mrn,Db,Bnk,Utvr,Ut,Utzl,Mas,Bkl,Ac,Ashd,Asb,Rai,Asdz,Shl
 Rotterdam - Schiphol - Arnhem;3200;Ah,Otb,Wf,Ed,Klp,Mrn,Db,Bnk,Utvr,Ut,Utzl,Mas,Bkl,Ac,Ashd,Asb,Rai,Asdz,Shl,Hfd,Nvp,Ssh,Ledn,Dvnk,Vst,Gvm,Laa,Gv,Gvmw,Rsw,Dt,Dtcp,Sdm,Rtd
@@ -54,7 +54,7 @@ Gouda Goverwelle - Den Haag C;6800;Gdg,Gd,Llzm,Ztmo,Ztm,Ypb,Vb,Gvc
 Utrecht C - Den Haag C;6900;Ut,Utlr,Utt,Vtn,Wd,Gdg,Gd,Llzm,Ztmo,Ztm,Ypb,Vb,Gvc
 Enschede - Apeldoorn;7000;Es,Esk,Hgl,Bn,Amri,Aml,Wdn,Rsn,Hon,Dvc,Dv,Twl,Apdo,Apd
 Breukelen - Rhenen;7300;Rhn,Vndc,Vndw,Mrn,Db,Bnk,Utvr,Ut,Utzl,Mas,Bkl
-Uitgeest - Driebergen-Zeist;7400;Db,Bnk,Utvr,Ut,Utzl,Mas,Bkl,Ac,Ashd,Asb,Dvd,Asa,Asdmm,Asd,Ass,Zd,Kz,Zzs,Wm,Kma,Utg
+Uitgeest - Driebergen-Zeist;7400;Db,Bnk,Utvr,Ut,Utzl,Mas,Bkl,Ac,Ashd,Asb,Dvd,Asa,Asdm,Asd,Ass,Zd,Kz,Zzs,Wm,Kma,Utg
 Ede-Wageningen - Arnhem C;7500;Ah,Otb,Wf,Ed
 Wijchen - Zutphen;7600;Zp,Bmn,Dr,Rh,Vp,Ahpr,Ahp,Ah,Ahz,Est,Nml,Nm,Nmgo,Nmd,Wc
 Groningen - Zwolle;8100;Gn,Gerp,Hrn,Asn,Bl,Hgv,Mp,Zl
@@ -71,7 +71,7 @@ Lelystad - Amsterdam C;14300;Lls,Almo,Almb,Almp,Alm,Almm,Ampo,Wp,Dmn,Assp,Asdm,A
 Eindhoven C - Deurne;14400;Ehv,Hmbv,Hmh,Hm,Hmbh,Dn
 Almere Utrecht;14900;Ut,Uto,Hor,Hvsp,Hvs,Hvsm,Bsmz,Ndb,Ampo,Almm,Alm
 Zandvoort - Haarlem;15400;Zvt,Ovn,Hlm
-Utrecht - Hilversum - Amsterdam - Schiphol;15800;Ut,Uto,Hor,Hvsp,Hvs,Hvsm,Bsmz,Mdb,Wp,Dmn,Assp,Asdm,Asd,Ass,Asdl,Shl
+Utrecht - Hilversum - Amsterdam - Schiphol;15800;Ut,Uto,Hor,Hvsp,Hvs,Hvsm,Bsmz,Ndb,Wp,Dmn,Assp,Asdm,Asd,Ass,Asdl,Shl
 Weert - Eindhoven;16400;Wt,Mz,Hze,Gp,Ehv
 Dordrecht - Breda;16600;Ddr,Ddzd,Zlw,Bdpb,Bd
 Eindhoven - Utrecht/Rotterdam;21400;Ehv,Ehs,Bet,Btl,Vg,Ht,Zbm,Gdm,Cl,Htnc,Htn,Utln,Utvr,Ut,Rtd,Rtb,Rtz,Rtst,Rlb,Brd,Zwd,Ddr,Ddzd,Zlw,Bdpb,Bd,Gz,Tbr,Tbu,Tb,Ot,Btl,Bet,Ehs,Ehv,Ht,Tb
