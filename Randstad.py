@@ -22,6 +22,7 @@ df = pd.DataFrame(data)
 for i in stations:
     df['Station'] = stations['name_long']
     df['Code'] = stations['code']
+    df['uic'] = stations[ 'uic']
     df['Lat-coord'] = stations['geo_lat']
     df['Lng-coord'] = stations['geo_lng']
 
@@ -56,7 +57,11 @@ for i, row in df.iterrows():
     else:
         df.loc[i, 'Randstad'] = 0
 
-df.to_csv('Randstad.csv')
+#Filtering the stations outside The Netherlands
+filtered_df = df[(df['uic'] >= 8400000) & (df['uic'] < 8500000)]
+
+print(filtered_df)
+filtered_df.to_csv('Randstad ZONDER buitenland.csv')
               
 
 
