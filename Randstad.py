@@ -60,8 +60,10 @@ for i, row in df.iterrows():
 #Filtering the stations outside The Netherlands
 filtered_df = df[(df['uic'] >= 8400000) & (df['uic'] < 8500000)]
 
-print(filtered_df)
-filtered_df.to_csv('Randstad ZONDER buitenland.csv')
+print(df)
+
+filtered_df.to_csv('Randstad-0.csv')
+df.to_csv('Randstad-1.csv')
               
 
 
