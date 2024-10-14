@@ -84,3 +84,41 @@ Zandvoort - Haarlem;25400;Zvt,Ovn,Hlm
 Utrecht C - Maliebaan;28300;Ut,Uto,Utm
 Amsterdam C - Rotterdam C;28500;Asd,Ass,Asdl,Shl,Hfd,Nvp,Ssh,Ledn,Dvnk,Vst,Gvm,Laa,Gv,Gvmw,Rsw,Dt,Dtcp,Sdm,Rtd
 Enschede - Almelo;28600;Es,Esk,Hgl,Bn,Amri,Aml
+Emmen - Zwolle;13800;Emn,Emnz,Na,Dln,Co,Gbg,Hdb,Mrb,Omn,Dl,Zl
+Zutphen - Apeldoorn;17800;Zp,Vem,Kbk,Apdm,Apd
+Luik - Aken;18900;Ahbf,Aw,Hz,Eghm,Lg,Hrl,Hrlw,Vdl,Kmr,Sog,Vk,Sgl,Mes,Mtn,Mt,Mtr,Edn,Fvs,Bressx,Luik
+Groningen - Bad Nieuweschans;20100;Gn,Gerp,Kw,Mth,Hgz,Zb,Sda,Ws,Nsch
+Winterswijk - Apeldoorn (snel);30400;Ww,Www,Ltv,Rl,Vd,Zp,Vem,Kbk,Apdm,Apd
+Winterswijk - Zutphen;30800;Ww,Www,Ltv,Rl,Vd,Zp
+Winterswijk - Arnhem;30900;Ww,Atn,Vsv,Tbg,Gdr,Dtc,Dtch,Wl,Did,Zv,Dvn,Wtv,Ahp,Ah
+Hardenberg - Almelo;31000;Hdb,Mrb,Vhp,Da,Vz,Aml
+Arnhem - Tiel;31100;Ah,Ahz,Est,Za,Hmn,Op,Ktr,Tl
+Oldenzaal - Zutphen;31200;Odz,Hglo,Hgl,Hglg,Ddn,Go,Lc,Zp
+Maastricht Randwyck - Kerkrade;32000;Mtr,Mt,Mtn,Mes,Sgl,Vk,Sog,Kmr,Vdl,Hrlw,Hrl,Lg,Egh,Cvm,Krd
+Roermond - Nijmegen;32200;Rm,Sm,Rv,Tg,Vl,Br,Vry,Vlb,Bmr,Ck,Mmlh,Nmh,Nm
+Venray - Nijmegen;32300;Vl,Br,Vry,Vlb,Bmr,Ck,Mmlh,Nmh,Nm
+Maastricht Randwyck - Roermond;32400;Mtr,Mt,Bde,Bk,Lut,Std,Srn,Ec,Rm
+Heerlen - Sittard;32500;Hrl,Hb,Nh,Sn,Sbk,Gln,Std
+Winterswijk - Arnhem;36900;Ww,Atn,Vsv,Tbg,Gdr,Dtc,Dtch,Wl,Did,Zv,Dvn,Wtv,Ahp,Ah
+Sneek - Leeuwarden;37000;Sk,Sknd,Mg,Lw
+Stavoren - Leeuwarden;37100;Stv,Kmw,Hnp,Wk,IJt,Sk,Sknd,Mg,Lw
+Harlingen Haven - Leeuwarden;37200;Hlgh,Hlg,Fn,Drp,Dei,Lw
+Leeuwarden - Groningen;37300;Lw,Lwc,Hdg,Fwd,Dwe,Bp,Gk,Zh,Gn
+Leeuwarden - Groningen;37400;Lw,Lwc,Hdg,Fwd,Dwe,Bp,Gk,Zh,Gn
+Groningen - Bad Nieuweschans;37500;Gn,Gerp,Kw,Mth,Hgz,Zb,Sda,Ws,Nsch
+Groningen - Eemshaven;37600;Eem,Rd,Uhm,Uhz,Ust,Wfm,Bf,Wsm,Swd,Gnn,Gn
+Delfzijl - Groningen;37700;Dz,Dzw,Apg,Lp,Stm,Bdm,Swd,Gnn,Gn
+Groningen - Veendam;37800;Gn,Gerp,Kw,Mth,Hgz,Zb,Vdm
+Groningen - Bad Nieuweschans;37900;Gn,Gerp,Kw,Mth,Hgz,Zb,Sda,Ws,Nsch
+Emmen - Zwolle;3800;Emn,Emnz,Na,Dln,Co,Gbg,Hdb,Mrb,Omn,Dl,Zl
+Sneek - Leeuwarden;38000;Sk,Sknd,Mg,Lw
+Emmen - Zwolle;8000;Emn,Emnz,Na,Dln,Co,Gbg,Hdb,Mrb,Omn,Dl,Zl
+Gorinchem - Dordrecht;7100;Gr,Bhdv,Gnd,Hbzm,Sdt,Sdtb,Ddrs,Ddr
+Geldermalsen - Dordrecht;7200;Gdm,Bsd,Ldm,Akl,Gr,Bhdv,Gnd,Hbzm,Sdt,Sdtb,Ddrs,Ddr
+Enschede - Zwolle;7900;Es,Esk,Hgl,Bn,Amri,Aml,Wdn,Nvd,Rat,Hno,Zl
+Enschede - Zwolle (IC);17900;Es,Esk,Hgl,Bn,Amri,Aml,Wdn,Nvd,Rat,Hno,Zl
+Enschede - Almelo (Werk);27900;Es,Esk,Hgl,Bn,Amri,Aml,Wdn,Nvd,Rat,Hno,Zl
+Kampen - Zwolle;8500;Kpn,Zlsh,Zl
+Ede-Wageningen - Amersfoort;31300;Ed,Edc,Ltn,Bnz,Bnc,Bnn,Hvl,Amf
+Barneveld Zuid - Amersfoort;31400;Bnz,Bnc,Bnn,Hvl,Amf
+
