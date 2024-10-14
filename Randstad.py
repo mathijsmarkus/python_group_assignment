@@ -13,7 +13,8 @@ data = {
     'Code':[],
     'Lat-coord':[],
     'Lng-coord': [], 
-    'Randstad': []
+    'Randstad': [],
+    'Type' : []
 }
 
 df = pd.DataFrame(data)
@@ -25,15 +26,16 @@ for i in stations:
     df['uic'] = stations[ 'uic']
     df['Lat-coord'] = stations['geo_lat']
     df['Lng-coord'] = stations['geo_lng']
+    df['Type'] = stations['type']
 
 #Defining the borders of the Randstad
 border_n = 52.469165802002 #Long coord of Zaandijk Zaanse Schans
 border_s = 51.790000915527 #Long coord of Dordrecht Zuid
 
-lat1 = 51.833889007568 #Lat coord of Gorinchem
-long1 = 4.9683332443237 #Long coord of Gorinchem
-lat2 = 52.153888702393 #Lat coord of Amersfoort Centraal
-long2 = 5.3705554008484 #Long coord of Amersfoort Centraal
+lat1 = 51.833889007568 #Lat coordinate of Gorinchem
+long1 = 4.9683332443237 #Long coordinate of Gorinchem
+lat2 = 52.192779541016 #Lat coordinate of Amersfoort Vathorst
+long2 = 5.4338889122009 #Long coordinate of Amersfoort Vathorst
 
 pointA = [lat1, long1]
 pointB = [lat2, long2]
@@ -57,6 +59,16 @@ for i, row in df.iterrows():
     else:
         df.loc[i, 'Randstad'] = 0
 
+#Check if the station is a intercity or sprinter station
+intercitystations = ['knooppuntIntercitystation', 'intercitystation', 'knooppuntSneltreinstation', 'megastation', 'sneltreinstation']
+sprinterstations = ['stoptreinstation', 'knooppuntStoptreinstation']
+
+df['Type code'] = df['Type'].apply(lambda x: 1 if x in intercitystations else 0 if x in sprinterstations else 2)
+
+
+#Ordering the columns
+df = df[['uic', 'Station', 'Code', 'Lat-coord', 'Lng-coord', 'Type', 'Type code', 'Randstad']]
+
 #Filtering the stations outside The Netherlands
 filtered_df = df[(df['uic'] >= 8400000) & (df['uic'] < 8500000)]
 
@@ -65,7 +77,6 @@ print(df)
 filtered_df.to_csv('Randstad-0.csv')
 df.to_csv('Randstad-1.csv')
               
-
 
 
 
