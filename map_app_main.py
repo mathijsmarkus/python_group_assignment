@@ -11,7 +11,7 @@ def load_data():
     df_hele_week = pd.read_csv("Streamlit_data/PlotDataHeleWeek.csv")
     df_other_set_1 = pd.read_csv("Streamlit_data/PlotData2024-10-07.csv")  # Add your other datasets here
     df_other_set_2 = pd.read_csv("Streamlit_data/PlotData2024-10-07 - kopie.csv")
-    stations = pd.read_csv("Streamlit_data/Randstad-0.csv")
+    stations = pd.read_csv("Streamlit_data/Randstad-0.0.csv")
     return df_hele_week, df_other_set_1, df_other_set_2, stations
 
 # Extract coordinates function
@@ -74,41 +74,18 @@ def add_stations_to_map(m, stations, selected_types):
                 fill=True,
                 fill_opacity=0,  # Make the clickable area invisible
                 popup=row['Station'],
-                weight=0  # No border for a seamless look
+                weight=row['Type code'] # No border for a seamless look
             ).add_to(m)
     
     return m
 
-# Add legend to the map
-def add_legend(m):
-    legend_html = """
-    <div style="position: fixed; 
-                top: 10px; 
-                right: 10px; 
-                width: 150px; 
-                height: auto; 
-                background-color: white; 
-                border: 2px solid grey; 
-                z-index:9999; 
-                padding: 10px;">
-        <h4 style="margin: 0; text-align: center;">Station Legend</h4>
-        <i style="background: #bbbfb5; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></i> Non-Randstad<br>
-        <i style="background: #868a81; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></i> Randstad<br>
-    </div>
-    """
-    # Add the HTML legend to the map using the Popup
-    folium.Marker(
-        location=m.location,
-        icon=folium.DivIcon(html=legend_html),
-        control=False
-    ).add_to(m)
 
 # Main function for Streamlit
 def main():
-    st.title("Intensity of rail use")
+    st.title("Intensity of Rail Use")
     st.write("The map below shows the intensity of each piece of rail in The Netherlands. The map is adjustable. \
-             Different station types can be selected, as well as different transport operators.")
-    
+              Different station types can be selected, as well as different transport operators.")
+
     # Load and process data
     df_hele_week, df_other_set_1, df_other_set_2, stations = load_data()
 
@@ -151,11 +128,27 @@ def main():
     if station_type:
         folium_map = add_stations_to_map(folium_map, stations, station_type)
 
-    # Add legend to the map
-    add_legend(folium_map)
-
     # Display the map in Streamlit
     st.components.v1.html(folium_map._repr_html_(), height=600)
+
+    # Create a legend on the right side of the map
+    legend_html = """
+    <div style="position: relative; 
+                top: -610px; 
+                left: 530px; 
+                width: 150px; 
+                height: 100px; 
+                border:2px solid grey; 
+                background-color: white; 
+                padding: 10px; 
+                font-size: 14px; 
+                margin-top: 10px;">
+    <b>Legend</b><br>
+    <i style="color: #bbbfb5;">&#9679;</i> Non-Randstad<br>
+    <i style="color: #868a81;">&#9679;</i> Randstad<br>
+    </div>
+    """
+    st.markdown(legend_html, unsafe_allow_html=True)
 
 # Run the app
 if __name__ == "__main__":
