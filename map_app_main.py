@@ -7,8 +7,8 @@ import streamlit as st
 # Load the main CSV data
 @st.cache_data
 def load_data():
-    df = pd.read_csv("data/PlotDataHeleWeek.csv")
-    stations = pd.read_csv("data/Randstad.csv")
+    df = pd.read_csv("Streamlit_data/PlotDataHeleWeek.csv")
+    stations = pd.read_csv("Streamlit_data/Randstad.csv")
     return df, stations
 
 # Extract coordinates function
