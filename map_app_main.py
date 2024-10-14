@@ -94,7 +94,7 @@ def add_station_marker(m, row):
         fill=True,
         fill_opacity=0,  # Make the clickable area invisible
         popup=row['Station'],
-        weight=0  # No border for a seamless look
+        weight=row['Type code']  # No border for a seamless look
     ).add_to(m)
 
 
@@ -136,6 +136,7 @@ def main():
     selected_type_codes = st.sidebar.multiselect(
         "Select Type codes to display:",
         options=type_code_options,
+        format_func=lambda x: "Intercity station" if x == 1.0 else "Sprinter station",
         default=[]  # Default can be adjusted as needed
     )
 
