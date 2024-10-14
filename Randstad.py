@@ -40,7 +40,7 @@ long2 = 5.4338889122009 #Long coordinate of Amersfoort Vathorst
 pointA = [lat1, long1]
 pointB = [lat2, long2]
 
-vector1 = [pointB[0] - pointA[0], pointB[1] - pointA[1]] #Line between Gorinchem and Amersfoort Centraal 
+vector1 = [pointB[0] - pointA[0], pointB[1] - pointA[1]] #Line between Gorinchem and Amersfoort Vathorst 
 
 
 for i, row in df.iterrows():
@@ -61,7 +61,7 @@ for i, row in df.iterrows():
 
 #Check if the station is a intercity or sprinter station
 intercitystations = ['knooppuntIntercitystation', 'intercitystation', 'knooppuntSneltreinstation', 'megastation', 'sneltreinstation']
-sprinterstations = ['stoptreinstation', 'knooppuntStoptreinstation']
+sprinterstations = ['stoptreinstation', 'knooppuntStoptreinstation', 'facultatiefstation']
 
 df['Type code'] = df['Type'].apply(lambda x: 1 if x in intercitystations else 0 if x in sprinterstations else 2)
 
@@ -74,8 +74,8 @@ filtered_df = df[(df['uic'] >= 8400000) & (df['uic'] < 8500000)]
 
 print(df)
 
-filtered_df.to_csv('Randstad-0.csv')
-df.to_csv('Randstad-1.csv')
+filtered_df.to_csv('Randstad-0.0.csv')
+df.to_csv('Randstad-1.0.csv')
               
 
 
