@@ -11,7 +11,7 @@ def load_data():
     df_hele_week = pd.read_csv("Streamlit_data/PlotDataHeleWeek.csv")
     df_other_set_1 = pd.read_csv("Streamlit_data/PlotData2024-10-07.csv")  # Add your other datasets here
     df_other_set_2 = pd.read_csv("Streamlit_data/PlotData2024-10-07 - kopie.csv")
-    stations = pd.read_csv("Randstad-0.0.csv")
+    stations = pd.read_csv("Streamlit_data/Randstad-0.csv")
     return df_hele_week, df_other_set_1, df_other_set_2, stations
 
 # Extract coordinates function
@@ -50,34 +50,52 @@ def add_lines_to_map(m, df):
     return m
 
 # Add station markers based on selection
-def add_stations_to_map(m, stations, selected_types):
+def add_stations_to_map(m, stations, selected_types, selected_type_codes):
     for _, row in stations.iterrows():
-        if row['Randstad'] in selected_types:
-            color = '#bbbfb5' if row['Randstad'] == 0.0 else '#868a81'
-           
-            # Add a visible small marker
-            folium.CircleMarker(
-                location=[row['Lat-coord'], row['Lng-coord']],
-                radius=1,  # Keep the bullet size small
-                color=color,
-                fill=True,
-                fill_opacity=1,
-                popup=row['Station'],  # Show station name on click
-                tooltip=row['Station']  # Show station name on hover
-            ).add_to(m)
-            
-            # Add an invisible, larger clickable area to make selection easier
-            folium.CircleMarker(
-                location=[row['Lat-coord'], row['Lng-coord']],
-                radius=8,  # Larger radius for easier selection
-                color=color,
-                fill=True,
-                fill_opacity=0,  # Make the clickable area invisible
-                popup=row['Station'],
-                weight=row['Type code'] # No border for a seamless look
-            ).add_to(m)
-    
+        # Logic to filter stations based on selected types and type codes
+        if selected_types and selected_type_codes:  # Both selected
+            if row['Randstad'] in selected_types and row['Type code'] in selected_type_codes:
+                add_station_marker(m, row)
+        elif selected_types:  # Only station types selected
+            if row['Randstad'] in selected_types:
+                add_station_marker(m, row)
+        elif selected_type_codes:  # Only type codes selected
+            if row['Type code'] in selected_type_codes:
+                # Show Randstad intercity stations if type code is 1
+                if row['Type code'] == 1 and row['Randstad'] == 1.0:
+                    add_station_marker(m, row)
+        # If Randstad is selected but no type code selected
+        elif selected_types == [1.0]:  # If Randstad is selected and no types are selected
+            if row['Randstad'] == 1.0:
+                add_station_marker(m, row)
+
     return m
+
+def add_station_marker(m, row):
+    # Determine the color based on Randstad type
+    color = '#bbbfb5' if row['Randstad'] == 0.0 else '#868a81'
+    
+    # Add a visible small marker
+    folium.CircleMarker(
+        location=[row['Lat-coord'], row['Lng-coord']],
+        radius=1,  # Keep the bullet size small
+        color=color,
+        fill=True,
+        fill_opacity=1,
+        popup=row['Station'],  # Show station name on click
+        tooltip=row['Station']  # Show station name on hover
+    ).add_to(m)
+    
+    # Add an invisible, larger clickable area to make selection easier
+    folium.CircleMarker(
+        location=[row['Lat-coord'], row['Lng-coord']],
+        radius=8,  # Larger radius for easier selection
+        color=color,
+        fill=True,
+        fill_opacity=0,  # Make the clickable area invisible
+        popup=row['Station'],
+        weight=row['Type code']  # No border for a seamless look
+    ).add_to(m)
 
 
 # Main function for Streamlit
@@ -107,10 +125,19 @@ def main():
 
     # Sidebar selection for station types
     station_type = st.sidebar.multiselect(
-        "Select station types to display:",
+        "Select Randstad type to display:",
         options=[0.0, 1.0],
         format_func=lambda x: "Randstad" if x == 1.0 else "Non-Randstad",
         default=[]
+    )
+
+    # Sidebar selection for Type code
+    type_code_options = stations['Type code'].unique()  # Get unique Type codes from the stations
+    selected_type_codes = st.sidebar.multiselect(
+        "Select Type codes to display:",
+        options=type_code_options,
+        format_func=lambda x: "Intercity station" if x == 1.0 else "Sprinter station",
+        default=[]  # Default can be adjusted as needed
     )
 
     # Draw the initial map
@@ -125,8 +152,7 @@ def main():
         folium_map = add_lines_to_map(folium_map, df_other_set_2)
 
     # Add selected station types to the map (if any)
-    if station_type:
-        folium_map = add_stations_to_map(folium_map, stations, station_type)
+    folium_map = add_stations_to_map(folium_map, stations, station_type, selected_type_codes)
 
     # Display the map in Streamlit
     st.components.v1.html(folium_map._repr_html_(), height=600)
