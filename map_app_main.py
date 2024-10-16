@@ -11,7 +11,7 @@ def load_data():
     df_hele_week = pd.read_csv("Streamlit_data/PlotDataHeleWeek.csv")
     df_other_set_1 = pd.read_csv("Streamlit_data/PlotData2024-10-07.csv")  # Add your other datasets here
     df_other_set_2 = pd.read_csv("Streamlit_data/PlotData2024-10-07 - kopie.csv")
-    stations = pd.read_csv("Streamlit_data/Randstad-0.0.csv")
+    stations = pd.read_csv("Randstad-0.0.csv")
     return df_hele_week, df_other_set_1, df_other_set_2, stations
 
 # Extract coordinates function
