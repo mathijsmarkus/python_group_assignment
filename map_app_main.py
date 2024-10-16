@@ -50,65 +50,60 @@ def add_lines_to_map(m, df):
     return m
 
 # Add station markers based on selection
-def add_stations_to_map(m, stations, selected_types):
+def add_stations_to_map(m, stations, selected_types, selected_type_codes):
     for _, row in stations.iterrows():
-        if row['Randstad'] in selected_types:
-            color = '#bbbfb5' if row['Randstad'] == 0.0 else '#868a81'
-           
-            # Add a visible small marker
-            folium.CircleMarker(
-                location=[row['Lat-coord'], row['Lng-coord']],
-                radius=1,  # Keep the bullet size small
-                color=color,
-                fill=True,
-                fill_opacity=1,
-                popup=row['Station'],  # Show station name on click
-                tooltip=row['Station']  # Show station name on hover
-            ).add_to(m)
-            
-            # Add an invisible, larger clickable area to make selection easier
-            folium.CircleMarker(
-                location=[row['Lat-coord'], row['Lng-coord']],
-                radius=8,  # Larger radius for easier selection
-                color=color,
-                fill=True,
-                fill_opacity=0,  # Make the clickable area invisible
-                popup=row['Station'],
-                weight=0  # No border for a seamless look
-            ).add_to(m)
-    
+        # Logic to filter stations based on selected types and type codes
+        if selected_types and selected_type_codes:  # Both selected
+            if row['Randstad'] in selected_types and row['Type code'] in selected_type_codes:
+                add_station_marker(m, row)
+        elif selected_types:  # Only station types selected
+            if row['Randstad'] in selected_types:
+                add_station_marker(m, row)
+        elif selected_type_codes:  # Only type codes selected
+            if row['Type code'] in selected_type_codes:
+                # Show Randstad intercity stations if type code is 1
+                if row['Type code'] == 1 and row['Randstad'] == 1.0:
+                    add_station_marker(m, row)
+        # If Randstad is selected but no type code selected
+        elif selected_types == [1.0]:  # If Randstad is selected and no types are selected
+            if row['Randstad'] == 1.0:
+                add_station_marker(m, row)
+
     return m
 
-# Add legend to the map
-def add_legend(m):
-    legend_html = """
-    <div style="position: fixed; 
-                top: 10px; 
-                right: 10px; 
-                width: 150px; 
-                height: auto; 
-                background-color: white; 
-                border: 2px solid grey; 
-                z-index:9999; 
-                padding: 10px;">
-        <h4 style="margin: 0; text-align: center;">Station Legend</h4>
-        <i style="background: #bbbfb5; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></i> Non-Randstad<br>
-        <i style="background: #868a81; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></i> Randstad<br>
-    </div>
-    """
-    # Add the HTML legend to the map using the Popup
-    folium.Marker(
-        location=m.location,
-        icon=folium.DivIcon(html=legend_html),
-        control=False
+def add_station_marker(m, row):
+    # Determine the color based on Randstad type
+    color = '#bbbfb5' if row['Randstad'] == 0.0 else '#868a81'
+    
+    # Add a visible small marker
+    folium.CircleMarker(
+        location=[row['Lat-coord'], row['Lng-coord']],
+        radius=1,  # Keep the bullet size small
+        color=color,
+        fill=True,
+        fill_opacity=1,
+        popup=row['Station'],  # Show station name on click
+        tooltip=row['Station']  # Show station name on hover
     ).add_to(m)
+    
+    # Add an invisible, larger clickable area to make selection easier
+    folium.CircleMarker(
+        location=[row['Lat-coord'], row['Lng-coord']],
+        radius=8,  # Larger radius for easier selection
+        color=color,
+        fill=True,
+        fill_opacity=0,  # Make the clickable area invisible
+        popup=row['Station'],
+        weight=row['Type code']  # No border for a seamless look
+    ).add_to(m)
+
 
 # Main function for Streamlit
 def main():
-    st.title("Intensity of rail use")
+    st.title("Intensity of Rail Use")
     st.write("The map below shows the intensity of each piece of rail in The Netherlands. The map is adjustable. \
-             Different station types can be selected, as well as different transport operators.")
-    
+              Different station types can be selected, as well as different transport operators.")
+
     # Load and process data
     df_hele_week, df_other_set_1, df_other_set_2, stations = load_data()
 
@@ -130,10 +125,19 @@ def main():
 
     # Sidebar selection for station types
     station_type = st.sidebar.multiselect(
-        "Select station types to display:",
+        "Select Randstad type to display:",
         options=[0.0, 1.0],
         format_func=lambda x: "Randstad" if x == 1.0 else "Non-Randstad",
         default=[]
+    )
+
+    # Sidebar selection for Type code
+    type_code_options = stations['Type code'].unique()  # Get unique Type codes from the stations
+    selected_type_codes = st.sidebar.multiselect(
+        "Select Type codes to display:",
+        options=type_code_options,
+        format_func=lambda x: "Intercity station" if x == 1.0 else "Sprinter station",
+        default=[]  # Default can be adjusted as needed
     )
 
     # Draw the initial map
@@ -148,14 +152,29 @@ def main():
         folium_map = add_lines_to_map(folium_map, df_other_set_2)
 
     # Add selected station types to the map (if any)
-    if station_type:
-        folium_map = add_stations_to_map(folium_map, stations, station_type)
-
-    # Add legend to the map
-    add_legend(folium_map)
+    folium_map = add_stations_to_map(folium_map, stations, station_type, selected_type_codes)
 
     # Display the map in Streamlit
     st.components.v1.html(folium_map._repr_html_(), height=600)
+
+    # Create a legend on the right side of the map
+    legend_html = """
+    <div style="position: relative; 
+                top: -610px; 
+                left: 530px; 
+                width: 150px; 
+                height: 100px; 
+                border:2px solid grey; 
+                background-color: white; 
+                padding: 10px; 
+                font-size: 14px; 
+                margin-top: 10px;">
+    <b>Legend</b><br>
+    <i style="color: #bbbfb5;">&#9679;</i> Non-Randstad<br>
+    <i style="color: #868a81;">&#9679;</i> Randstad<br>
+    </div>
+    """
+    st.markdown(legend_html, unsafe_allow_html=True)
 
 # Run the app
 if __name__ == "__main__":
