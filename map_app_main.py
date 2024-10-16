@@ -8,14 +8,14 @@ import streamlit as st
 @st.cache_data
 def load_data():
     # Load datasets for each day of the week
-    df_hele_week = pd.read_csv("Streamlit_data/PlotDataHeleWeek.csv")
-    df_monday = pd.read_csv("Streamlit_data/PlotDataMonday.csv")
-    df_tuesday = pd.read_csv("Streamlit_data/PlotDataTuesday.csv")
-    df_wednesday = pd.read_csv("Streamlit_data/PlotDataWednesday.csv")
-    df_thursday = pd.read_csv("Streamlit_data/PlotDataThursday.csv")
-    df_friday = pd.read_csv("Streamlit_data/PlotDataFriday.csv")
-    df_saturday = pd.read_csv("Streamlit_data/PlotDataSaturday.csv")
-    df_sunday = pd.read_csv("Streamlit_data/PlotDataSunday.csv")
+    df_hele_week = pd.read_csv("OutputData/PlotDataWeek.csv")
+    df_monday = pd.read_csv("OutputData/PlotDataMonday.csv")
+    df_tuesday = pd.read_csv("OutputData/PlotDataTuesday.csv")
+    df_wednesday = pd.read_csv("OutputData/PlotDataWednesday.csv")
+    df_thursday = pd.read_csv("OutputData/PlotDataThursday.csv")
+    df_friday = pd.read_csv("OutputData/PlotDataFriday.csv")
+    df_saturday = pd.read_csv("OutputData/PlotDataSaturday.csv")
+    df_sunday = pd.read_csv("OutputData/PlotDataSunday.csv")
     
     stations = pd.read_csv("Streamlit_data/Randstad-0.0.csv")
     
@@ -133,13 +133,13 @@ def main():
     df_saturday = process_line_data(df_saturday)
     df_sunday = process_line_data(df_sunday)
 
-    # Get the initial map center and zoom level from the first coordinates
-    initial_center = df_hele_week['latlon_coords'][0][0]  # First coordinate
+    # Get the initial map center and zoom level (Utrecht coordinates)
+    initial_center = [52.0907, 5.1214]  # Utrecht coordinates
     initial_zoom = 7
 
     # Sidebar for line set selection (for each day of the week)
     line_set = st.sidebar.selectbox(
-        "Select provider to display:",
+        "Select day of the week to display:",
         options=['PlotDataHeleWeek', 'PlotDataMonday', 'PlotDataTuesday', 
                  'PlotDataWednesday', 'PlotDataThursday', 'PlotDataFriday', 
                  'PlotDataSaturday', 'PlotDataSunday'],
