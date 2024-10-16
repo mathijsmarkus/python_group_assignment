@@ -247,7 +247,7 @@
 245,8400317,Heemskerk,HK,52.495277404785,4.6869444847107,stoptreinstation,0,0.0
 246,8400302,Heemstede-Aerdenhout,HAD,52.35916519165,4.6066665649414,intercitystation,1,1.0
 247,8400305,Heerenveen,HR,52.961387634277,5.9141664505005,intercitystation,1,0.0
-248,8400301,Heerenveen IJsstadion,HRY,52.935276031494,5.9438886642456,facultatiefStation,2,0.0
+248,8400301,Heerenveen IJsstadion,HRY,52.935276031494,5.9438886642456,facultatiefStation,0,0.0
 249,8400306,Heerhugowaard,HWD,52.669723510742,4.8227777481079,knooppuntStoptreinstation,0,0.0
 250,8400307,Heerlen,HRL,50.89083480835,5.9749999046326,knooppuntIntercitystation,1,0.0
 251,8400404,Heerlen Woonboulevard,HRLW,50.896667,5.952222,stoptreinstation,0,0.0
@@ -444,7 +444,7 @@
 442,8400530,Rotterdam Centraal,RTD,51.92499923706,4.468888759613,megastation,1,1.0
 443,8400542,Rotterdam Lombardijen,RLB,51.880001068115,4.531388759613,stoptreinstation,0,1.0
 444,8400531,Rotterdam Noord,RTN,51.942222595215,4.4816665649414,stoptreinstation,0,1.0
-445,8400534,Rotterdam Stadion,RTST,51.893890380859,4.5197219848633,facultatiefStation,2,1.0
+445,8400534,Rotterdam Stadion,RTST,51.893890380859,4.5197219848633,facultatiefStation,0,1.0
 446,8400533,Rotterdam Zuid,RTZ,51.904445648193,4.5102777481079,stoptreinstation,0,1.0
 447,8822848,Ruisbroek-Sauvegarde,FSV,51.08115,4.32551,stoptreinstation,0,0.0
 448,8400537,Ruurlo,RL,52.0810888,6.4492656,stoptreinstation,0,0.0

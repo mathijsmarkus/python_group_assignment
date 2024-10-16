@@ -63,7 +63,7 @@ for i, row in df.iterrows():
 intercitystations = ['knooppuntIntercitystation', 'intercitystation', 'knooppuntSneltreinstation', 'megastation', 'sneltreinstation']
 sprinterstations = ['stoptreinstation', 'knooppuntStoptreinstation', 'facultatiefstation']
 
-df['Type code'] = df['Type'].apply(lambda x: 1 if x in intercitystations else 0 if x in sprinterstations else 2)
+df['Type code'] = df['Type'].apply(lambda x: 1 if x in intercitystations else 0 if x in sprinterstations else 0)
 
 
 #Ordering the columns
