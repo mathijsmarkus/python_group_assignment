@@ -3,6 +3,8 @@ import re
 from pyproj import Transformer
 import folium
 import streamlit as st
+from matplotlib import colors
+import numpy as np
 
 # Load the CSV data for multiple line sets (for each day of the week)
 @st.cache_data
@@ -34,8 +36,10 @@ def extract_coords(geometry_str):
 def process_line_data(df):
     df['coords'] = df['geometry'].apply(extract_coords)
     df = df.dropna(subset=['coords'])  # Drop rows where 'coords' is None
+
+    # Normalize seat capacity to use for color scaling
+    df['capacity_norm'] = (df['Seats'] - df['Seats'].min()) / (df['Seats'].max() - df['Seats'].min())
     
-    df['color_hex'] = df['color'].apply(lambda rgb: f'#{int(eval(rgb)[0]*255):02x}{int(eval(rgb)[1]*255):02x}{int(eval(rgb)[2]*255):02x}')
     transformer = Transformer.from_crs("epsg:32631", "epsg:4326")
     
     def convert_coords_to_latlon(coords):
@@ -47,6 +51,17 @@ def process_line_data(df):
     
     return df.dropna(subset=['latlon_coords'])  # Drop rows where 'latlon_coords' could not be computed
 
+# Generate a gradient color based on normalized capacity
+def capacity_color(norm_value):
+    # Define the color gradient from yellow (low) to red (high)
+    return colors.to_hex((1, 1 - norm_value, 0))  # Interpolates between yellow (0) and red (1)
+
+# Get color value for specific seat capacity
+def get_color_for_seat_value(seat_value, min_seat, max_seat):
+    if max_seat == min_seat:  # Avoid division by zero
+        return colors.to_hex((1, 0, 0))  # Return red if no variation in data
+    norm_value = (seat_value - min_seat) / (max_seat - min_seat)
+    return capacity_color(norm_value)
 
 # Efficiently plot lines and stations
 @st.cache_data
@@ -55,12 +70,13 @@ def draw_map(initial_center, initial_zoom):
     m = folium.Map(location=initial_center, zoom_start=initial_zoom, control_scale=True, tiles='CartoDB positron')
     return m
 
-# Add lines to the map
+# Add lines to the map with color based on seat capacity
 def add_lines_to_map(m, df):
     for _, row in df.iterrows():
         latlon_coords = row['latlon_coords']
-        color_hex = row['color_hex']
-        folium.PolyLine(latlon_coords, color=color_hex, weight=2.5, opacity=1).add_to(m)
+        norm_capacity = row['capacity_norm']
+        color = capacity_color(norm_capacity)
+        folium.PolyLine(latlon_coords, color=color, weight=2.5, opacity=1).add_to(m)
     return m
 
 # Add station markers based on selection
@@ -134,7 +150,7 @@ def main():
     df_sunday = process_line_data(df_sunday)
 
     # Get the initial map center and zoom level (Utrecht coordinates)
-    initial_center = [52.0907, 5.1214]  # Utrecht coordinates
+    initial_center = [52.0907, 6.1214]  # Utrecht coordinates
     initial_zoom = 7
 
     # Sidebar for line set selection (for each day of the week)
@@ -169,21 +185,36 @@ def main():
     # Add the selected line set to the map
     if line_set == 'PlotDataHeleWeek':
         folium_map = add_lines_to_map(folium_map, df_hele_week)
+        min_seat = int(df_hele_week['Seats'].min() // 1000)
+        max_seat = int(df_hele_week['Seats'].max() // 1000)
     elif line_set == 'PlotDataMonday':
         folium_map = add_lines_to_map(folium_map, df_monday)
+        min_seat = int(df_monday['Seats'].min() // 1000)
+        max_seat = int(df_monday['Seats'].max() // 1000)
     elif line_set == 'PlotDataTuesday':
         folium_map = add_lines_to_map(folium_map, df_tuesday)
+        min_seat = int(df_tuesday['Seats'].min() // 1000)
+        max_seat = int(df_tuesday['Seats'].max() // 1000)
     elif line_set == 'PlotDataWednesday':
         folium_map = add_lines_to_map(folium_map, df_wednesday)
+        min_seat = int(df_wednesday['Seats'].min() // 1000)
+        max_seat = int(df_wednesday['Seats'].max() // 1000)
     elif line_set == 'PlotDataThursday':
         folium_map = add_lines_to_map(folium_map, df_thursday)
+        min_seat = int(df_thursday['Seats'].min() // 1000)
+        max_seat = int(df_thursday['Seats'].max() // 1000)
     elif line_set == 'PlotDataFriday':
         folium_map = add_lines_to_map(folium_map, df_friday)
+        min_seat = int(df_friday['Seats'].min() // 1000)
+        max_seat = int(df_friday['Seats'].max() // 1000)
     elif line_set == 'PlotDataSaturday':
         folium_map = add_lines_to_map(folium_map, df_saturday)
+        min_seat = int(df_saturday['Seats'].min() // 1000)
+        max_seat = int(df_saturday['Seats'].max() // 1000)
     elif line_set == 'PlotDataSunday':
         folium_map = add_lines_to_map(folium_map, df_sunday)
-
+        min_seat = int(df_sunday['Seats'].min() // 1000)
+        max_seat = int(df_sunday['Seats'].max() // 1000)
     # Add selected station types to the map (if any)
     folium_map = add_stations_to_map(folium_map, stations, station_type, selected_type_codes)
 
@@ -191,24 +222,53 @@ def main():
     st.components.v1.html(folium_map._repr_html_(), height=600)
 
     # Create a legend on the right side of the map
+    #min_seat = int(df_hele_week['Seats'].min() // 1000)  # Deel door 1000 en rond naar beneden
+    #max_seat = int(df_hele_week['Seats'].max() // 1000)  # Deel door 1000 en rond naar beneden
+    median_seat = int((min_seat + max_seat) / 2)  # Bereken mediaan na delen door 1000
+    third_seat_value = median_seat - (median_seat - min_seat) // 2  # Bijvoorbeeld, een waarde tussen min en median
+    fourth_seat_value = max_seat - (max_seat - median_seat) // 2  # Bijvoorbeeld, een waarde tussen median en max
+
+    # Creëer de legenda aan de rechterkant van de kaart
     legend_html = """
     <div style="position: relative; 
                 top: -610px; 
-                left: 530px; 
-                width: 150px; 
-                height: 100px; 
+                left: 480px; 
+                width: 200px; 
+                height: 240px; 
                 border:2px solid grey; 
                 background-color: white; 
                 padding: 10px; 
                 font-size: 14px; 
                 margin-top: 10px;">
     <b>Legend</b><br>
-    <i style="color: #bbbfb5;">&#9679;</i> Non-Randstad<br>
-    <i style="color: #868a81;">&#9679;</i> Randstad<br>
+    <i>Seats capacity (x1000)</i><br>
+    <span style="display: flex; justify-content: space-between; padding-left: 10px;">
+        <span><i style="color: #ff0000;">&#9679;</i> Capacity:</span><span>{max_seat}</span>
+    </span>
+    <span style="display: flex; justify-content: space-between; padding-left: 10px;">
+        <span><i style="color: #ff8000;">&#9679;</i> Capacity:</span><span>{fourth_seat_value}</span>
+    </span>
+    <span style="display: flex; justify-content: space-between; padding-left: 10px;">
+        <span><i style="color: #ffa500;">&#9679;</i> Capacity:</span><span>{median_seat}</span>
+    </span>
+    <span style="display: flex; justify-content: space-between; padding-left: 10px;">
+        <span><i style="color: #ffff00;">&#9679;</i> Capacity:</span><span>{third_seat_value}</span>
+    </span>
+    <span style="display: flex; justify-content: space-between; padding-left: 10px;">
+        <span><i style="color: #ffff00;">&#9679;</i> Capacity:</span><span>{min_seat}</span>
+    </span>
+    <i>Stations</i><br>
+    <span style="display: flex; justify-content: space-between; padding-left: 10px;">
+        <span><i style="color: #bbbfb5;">&#9679;</i> Non-Randstad</span>
+    </span>
+    <span style="display: flex; justify-content: space-between; padding-left: 10px;">
+        <span><i style="color: #868a81;">&#9679;</i> Randstad</span>
+    </span>
     </div>
-    """
-    st.markdown(legend_html, unsafe_allow_html=True)
+    """.format(max_seat=max_seat, median_seat=median_seat, min_seat=min_seat, 
+            third_seat_value=third_seat_value, fourth_seat_value=fourth_seat_value)
 
+    st.markdown(legend_html, unsafe_allow_html=True)
 # Run the app
 if __name__ == "__main__":
     main()
