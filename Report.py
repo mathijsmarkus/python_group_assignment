@@ -26,7 +26,7 @@ This question will be answered by answering the following sub-questions:
 - How do other rail transporting companies compare to the NS?""")
 
 st.header('2. Introduction')
-st.write("""Every day, more than 1 million passengers use the services of the Dutch natioanl railway company, Nederlandse Spoorwegen (NS). 
+st.write("""Every day, more than 1 million passengers use the services of the Dutch national railway company, Nederlandse Spoorwegen (NS). 
          The NS has the concession to run the main rail routes in the Netherlands and operates with 4800 train rides and 260.000 seats per day with Sprinters and Intercity’s. 
          Every year the train schedule is updated and changes are made. Different tracks in the network have different frequencies of train service, which leads to different capacity between cities. 
          To understand and map those differences this project is set up. With databases from the NS an overview is made of the seat capacity between cities on the main rail route. 
