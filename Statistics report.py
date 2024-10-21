@@ -1,13 +1,13 @@
 import pandas as pd
+randstad = "Randstad-0.0.csv"
+week_trajectory = 'OutputData/SeatsPerTrajectoryWeek.csv' 
 
 
-
-#Minimum and Maximum seat capacity per week
-file_path = 'OutputData/SeatsPerTrajectoryWeek.csv'
-df = pd.read_csv(file_path, index_col =  'Unnamed: 0')
-sorted_df= df.sort_values(by = 'Seats', ascending=False)
-#print(sorted_df.head(10))
-#print(sorted_df.tail(10)) 
+def min_max_week():
+    df = pd.read_csv(week_trajectory, index_col =  'Unnamed: 0')
+    sorted_df= df.sort_values(by = 'Seats', ascending=False)
+    print(sorted_df.head(10))
+    print(sorted_df.tail(10)) 
 
 #Difference during the week
 monday = pd.read_csv('OutputData/SeatsPerTrajectoryMonday.csv', index_col = 'Unnamed: 0')
@@ -33,22 +33,34 @@ list1 = [monday, tuesday, wednesday, thursday, friday, saturday, sunday]
         #elif j < minvalue:
             #minvalue = j
 
-#Difference Randstand and not-Randstad
-file = pd.read_csv("Randstad-0.0.csv")
-Randstadvalues = file['Randstad'].value_counts()[1.0]
-notRandstandvalues = file['Randstad'].value_counts()[0.0]
+def difference_randstad():
+    df1 = pd.read_csv(randstad)
+    df2 = pd.read_csv(week_trajectory, index_col =  'Unnamed: 0')
+    Randstadvalues = df1['Randstad'].value_counts()[1.0]
+    notRandstandvalues = df1['Randstad'].value_counts()[0.0]
 
-Randstadtotal = 0
-notRandstandtotal = 0
+    Randstadtotal = 0
+    notRandstadtotal = 0
 
-for i in range(len(df)):
-    From = df['From'].iloc[i]
-    To = df['To'].iloc[i]
+    for i in range(len(df2)):
+        From = df2['From'].iloc[i]
+        To = df2['To'].iloc[i]
     
-    #Deciding if the station are in or outside the randstad
-    From_index = file[file['Code'] == From].index
-    To_index = file[file['Code'] == To].index
-    if file['Randstad'].iloc[From_index] == 1.0:
-        if file['Randstad'].iloc[To_index] == 1.0:
+        #Deciding if the station are in or outside the randstad
+        From_index = df1[df1['Code'] == From].index
+        To_index = df1[df1['Code'] == To].index
+        if not From_index.empty and not To_index.empty:
+            if df1['Randstad'].iloc[From_index[0]] == 1 or df1['Randstad'].iloc[To_index[0]] == 1:
+                Randstadtotal += df2['Seats'].iloc[i]
+            else:
+                notRandstadtotal += df2['Seats'].iloc[i]
+
+    Randstadavg = Randstadtotal / Randstadvalues
+    notRandstadavg = notRandstadtotal / notRandstandvalues
+    print(Randstadavg)
+    print(notRandstadavg)
+
+
+min_max_week()
 
 
