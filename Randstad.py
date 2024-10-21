@@ -61,7 +61,7 @@ for i, row in df.iterrows():
 
 #Check if the station is a intercity or sprinter station
 intercitystations = ['knooppuntIntercitystation', 'intercitystation', 'knooppuntSneltreinstation', 'megastation', 'sneltreinstation']
-sprinterstations = ['stoptreinstation', 'knooppuntStoptreinstation', 'facultatiefstation']
+sprinterstations = ['stoptreinstation', 'knooppuntStoptreinstation', 'facultatiefStation']
 
 df['Type code'] = df['Type'].apply(lambda x: 1 if x in intercitystations else 0 if x in sprinterstations else 0)
 
