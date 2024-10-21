@@ -1,4 +1,5 @@
 import pandas as pd
+
 randstad = "Randstad-0.0.csv"
 week_trajectory = 'OutputData/SeatsPerTrajectoryWeek.csv' 
 
@@ -18,7 +19,43 @@ friday = pd.read_csv('OutputData/SeatsPerTrajectoryFriday.csv', index_col = 'Unn
 saturday = pd.read_csv('OutputData/SeatsPerTrajectorySaturday.csv', index_col = 'Unnamed: 0')
 sunday = pd.read_csv('OutputData/SeatsPerTrajectorySunday.csv', index_col = 'Unnamed: 0')
 
-list1 = [monday, tuesday, wednesday, thursday, friday, saturday, sunday]
+
+
+week = pd.concat([monday, tuesday, wednesday, thursday, friday, saturday, sunday], axis = 1)
+print(week)
+
+df = pd.DataFrame(columns=['From', 'To', 'Difference', 'Maximum seats', 'Minimum seats'])
+for i in week.iloc[:, 14]:
+    if isinstance(i, float):
+        index = df.index[df[14] == i]
+        maxvalue = week.iloc[index, 2]
+        minvalue = week.iloc[index, 2]
+
+        seat_columns = [2, 5, 8, 11, 17, 20]
+        for j in seat_columns:
+            if week.iloc[value, j] > maxvalue:
+                maxvalue = week.iloc[value, j]
+            if week.iloc[value,j] < minvalue:
+                minvalue = week.iloc[value,j]
+    
+        From = week.iloc[value, 0]
+        To = week.iloc[value, 1]
+        difference = maxvalue - minvalue
+
+        df = df.append({
+            'From': From,
+            'To': To,
+            'Difference': difference,
+            'Maximum seats': maxvalue,
+            'Minimum seats': minvalue
+        }, ignore_index=True)
+
+print(df)
+
+
+
+
+
 
 #df1 = []
 #for i in list1:
@@ -61,6 +98,5 @@ def difference_randstad():
     print(notRandstadavg)
 
 
-min_max_week()
 
 
