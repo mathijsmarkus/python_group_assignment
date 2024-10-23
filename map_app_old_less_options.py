@@ -9,48 +9,20 @@ import numpy as np
 # Load the CSV data for multiple line sets (for each day of the week)
 @st.cache_data
 def load_data():
-    # Define the date range for the week
-    date_range = [
-        "2024-10-07",  # Monday
-        "2024-10-08",  # Tuesday
-        "2024-10-09",  # Wednesday
-        "2024-10-10",  # Thursday
-        "2024-10-11",  # Friday
-        "2024-10-12",  # Saturday
-        "2024-10-13"   # Sunday
-    ]
-    
     # Load datasets for each day of the week
-    df_list = []
-    for date in date_range:
-        df_all = pd.read_csv(f"OutputData/PlotData{date}all.csv")
-        df_interm = pd.read_csv(f"OutputData/PlotData{date}intercities.csv")
-        df_sprinter = pd.read_csv(f"OutputData/PlotData{date}sprinters.csv")
-        df_list.append((df_all, df_interm, df_sprinter))
-
-    # Load datasets for the entire week
-    df_week_all = pd.read_csv("OutputData/PlotDataWeekall.csv")
-    df_week_interm = pd.read_csv("OutputData/PlotDataWeekintercities.csv")
-    df_week_sprinter = pd.read_csv("OutputData/PlotDataWeeksprinters.csv")
-
+    df_hele_week = pd.read_csv("OutputData/PlotDataWeek.csv")
+    df_monday = pd.read_csv("OutputData/PlotDataMonday.csv")
+    df_tuesday = pd.read_csv("OutputData/PlotDataTuesday.csv")
+    df_wednesday = pd.read_csv("OutputData/PlotDataWednesday.csv")
+    df_thursday = pd.read_csv("OutputData/PlotDataThursday.csv")
+    df_friday = pd.read_csv("OutputData/PlotDataFriday.csv")
+    df_saturday = pd.read_csv("OutputData/PlotDataSaturday.csv")
+    df_sunday = pd.read_csv("OutputData/PlotDataSunday.csv")
+    
     stations = pd.read_csv("Streamlit_data/Randstad-0.0.csv")
-    # Unpack data into individual DataFrames
-    (df_monday, df_monday_interm, df_monday_sprinter), \
-    (df_tuesday, df_tuesday_interm, df_tuesday_sprinter), \
-    (df_wednesday, df_wednesday_interm, df_wednesday_sprinter), \
-    (df_thursday, df_thursday_interm, df_thursday_sprinter), \
-    (df_friday, df_friday_interm, df_friday_sprinter), \
-    (df_saturday, df_saturday_interm, df_saturday_sprinter), \
-    (df_sunday, df_sunday_interm, df_sunday_sprinter) = df_list
-
-    return (df_week_all, df_week_interm, df_week_sprinter, 
-            df_monday, df_monday_interm, df_monday_sprinter,
-            df_tuesday, df_tuesday_interm, df_tuesday_sprinter,
-            df_wednesday, df_wednesday_interm, df_wednesday_sprinter,
-            df_thursday, df_thursday_interm, df_thursday_sprinter,
-            df_friday, df_friday_interm, df_friday_sprinter,
-            df_saturday, df_saturday_interm, df_saturday_sprinter,
-            df_sunday, df_sunday_interm, df_sunday_sprinter, stations)
+    
+    return (df_hele_week, df_monday, df_tuesday, df_wednesday, 
+            df_thursday, df_friday, df_saturday, df_sunday, stations)
 
 # Extract coordinates function with added check for empty geometry
 def extract_coords(geometry_str):
@@ -164,75 +136,29 @@ def main():
               Different station types can be selected, as well as different transport operators.")
 
     # Load and process data
-    (df_week_all, df_week_interc, df_week_sprinter, 
-     df_monday, df_monday_interc, df_monday_sprinter,
-     df_tuesday, df_tuesday_interc, df_tuesday_sprinter,
-     df_wednesday, df_wednesday_interc, df_wednesday_sprinter,
-     df_thursday, df_thursday_interc, df_thursday_sprinter,
-     df_friday, df_friday_interc, df_friday_sprinter,
-     df_saturday, df_saturday_interc, df_saturday_sprinter,
-     df_sunday, df_sunday_interc, df_sunday_sprinter, stations) = load_data()
+    (df_hele_week, df_monday, df_tuesday, df_wednesday, 
+     df_thursday, df_friday, df_saturday, df_sunday, stations) = load_data()
 
     # Process each DataFrame
-    df_week_all = process_line_data(df_week_all)
-    df_week_interc = process_line_data(df_week_interc)
-    df_week_sprinter = process_line_data(df_week_sprinter)
+    df_hele_week = process_line_data(df_hele_week)
     df_monday = process_line_data(df_monday)
-    df_monday_interc = process_line_data(df_monday_interc)
-    df_monday_sprinter = process_line_data(df_monday_sprinter)
     df_tuesday = process_line_data(df_tuesday)
-    df_tuesday_interc = process_line_data(df_tuesday_interc)
-    df_tuesday_sprinter = process_line_data(df_tuesday_sprinter)
     df_wednesday = process_line_data(df_wednesday)
-    df_wednesday_interc = process_line_data(df_wednesday_interc)
-    df_wednesday_sprinter = process_line_data(df_wednesday_sprinter)
     df_thursday = process_line_data(df_thursday)
-    df_thursday_interc = process_line_data(df_thursday_interc)
-    df_thursday_sprinter = process_line_data(df_thursday_sprinter)
     df_friday = process_line_data(df_friday)
-    df_friday_interc = process_line_data(df_friday_interc)
-    df_friday_sprinter = process_line_data(df_friday_sprinter)
     df_saturday = process_line_data(df_saturday)
-    df_saturday_interc = process_line_data(df_saturday_interc)
-    df_saturday_sprinter = process_line_data(df_saturday_sprinter)
     df_sunday = process_line_data(df_sunday)
-    df_sunday_interc = process_line_data(df_sunday_interc)
-    df_sunday_sprinter = process_line_data(df_sunday_sprinter)
 
     # Get the initial map center and zoom level (Utrecht coordinates)
     initial_center = [52.0907, 6.1214]  # Utrecht coordinates
     initial_zoom = 7
 
-    # Sidebar for line set selection (all combinations)
+    # Sidebar for line set selection (for each day of the week)
     line_set = st.sidebar.selectbox(
-        "Select dataset to display:",
-        options=[
-            'PlotDataWeekall', 'PlotDataWeekintercities', 'PlotDataWeeksprinters',
-            'PlotDataMonday', 'PlotDataMondayintercities', 'PlotDataMondayprinters',
-            'PlotDataTuesday', 'PlotDataTuesdayintercities', 'PlotDataTuesdayprinters',
-            'PlotDataWednesday', 'PlotDataWednesdayintercities', 'PlotDataWednesdayprinters',
-            'PlotDataThursday', 'PlotDataThursdayintercities', 'PlotDataThursdayprinters',
-            'PlotDataFriday', 'PlotDataFridayintercities', 'PlotDataFridayprinters',
-            'PlotDataSaturday', 'PlotDataSaturdayintercities', 'PlotDataSaturdayprinters',
-            'PlotDataSunday', 'PlotDataSundayintercities', 'PlotDataSundayprinters'
-        ],
-        format_func=lambda x: x.replace("PlotData", "Data for ")  # Custom display names
-    )
-
-    # Set the default selection to PlotDataWeekall
-    line_set = st.sidebar.selectbox(
-        "Select dataset to display:",
-        options=[
-            'PlotDataWeekall', 'PlotDataWeekintercities', 'PlotDataWeeksprinters',
-            'PlotDataMonday', 'PlotDataMondayintercities', 'PlotDataMondayprinters',
-            'PlotDataTuesday', 'PlotDataTuesdayintercities', 'PlotDataTuesdayprinters',
-            'PlotDataWednesday', 'PlotDataWednesdayintercities', 'PlotDataWednesdayprinters',
-            'PlotDataThursday', 'PlotDataThursdayintercities', 'PlotDataThursdayprinters',
-            'PlotDataFriday', 'PlotDataFridayintercities', 'PlotDataFridayprinters',
-            'PlotDataSaturday', 'PlotDataSaturdayintercities', 'PlotDataSaturdayprinters',
-            'PlotDataSunday', 'PlotDataSundayintercities', 'PlotDataSundayprinters'
-        ],
-        index=0,  # Set default index to 0 (PlotDataWeekall)
+        "Select day of the week to display:",
+        options=['PlotDataHeleWeek', 'PlotDataMonday', 'PlotDataTuesday', 
+                 'PlotDataWednesday', 'PlotDataThursday', 'PlotDataFriday', 
+                 'PlotDataSaturday', 'PlotDataSunday'],
         format_func=lambda x: x.replace("PlotData", "Data for ")  # Custom display names
     )
 
@@ -257,102 +183,38 @@ def main():
     folium_map = draw_map(initial_center, initial_zoom)
 
     # Add the selected line set to the map
-    if line_set == 'PlotDataWeekall':
-        folium_map = add_lines_to_map(folium_map, df_week_all)
-        min_seat = int(df_week_all['Seats'].min() // 1000)
-        max_seat = int(df_week_all['Seats'].max() // 1000)
-    elif line_set == 'PlotDataWeekintercities':
-        folium_map = add_lines_to_map(folium_map, df_week_interc)
-        min_seat = int(df_week_interc['Seats'].min() // 1000)
-        max_seat = int(df_week_interc['Seats'].max() // 1000)
-    elif line_set == 'PlotDataWeeksprinters':
-        folium_map = add_lines_to_map(folium_map, df_week_sprinter)
-        min_seat = int(df_week_sprinter['Seats'].min() // 1000)
-        max_seat = int(df_week_sprinter['Seats'].max() // 1000)
+    if line_set == 'PlotDataHeleWeek':
+        folium_map = add_lines_to_map(folium_map, df_hele_week)
+        min_seat = int(df_hele_week['Seats'].min() // 1000)
+        max_seat = int(df_hele_week['Seats'].max() // 1000)
     elif line_set == 'PlotDataMonday':
         folium_map = add_lines_to_map(folium_map, df_monday)
         min_seat = int(df_monday['Seats'].min() // 1000)
         max_seat = int(df_monday['Seats'].max() // 1000)
-    elif line_set == 'PlotDataMondayintercities':
-        folium_map = add_lines_to_map(folium_map, df_monday_interc)
-        min_seat = int(df_monday_interc['Seats'].min() // 1000)
-        max_seat = int(df_monday_interc['Seats'].max() // 1000)
-    elif line_set == 'PlotDataMondayprinters':
-        folium_map = add_lines_to_map(folium_map, df_monday_sprinter)
-        min_seat = int(df_monday_sprinter['Seats'].min() // 1000)
-        max_seat = int(df_monday_sprinter['Seats'].max() // 1000)
     elif line_set == 'PlotDataTuesday':
         folium_map = add_lines_to_map(folium_map, df_tuesday)
         min_seat = int(df_tuesday['Seats'].min() // 1000)
         max_seat = int(df_tuesday['Seats'].max() // 1000)
-    elif line_set == 'PlotDataTuesdayintercities':
-        folium_map = add_lines_to_map(folium_map, df_tuesday_interc)
-        min_seat = int(df_tuesday_interc['Seats'].min() // 1000)
-        max_seat = int(df_tuesday_interc['Seats'].max() // 1000)
-    elif line_set == 'PlotDataTuesdayprinters':
-        folium_map = add_lines_to_map(folium_map, df_tuesday_sprinter)
-        min_seat = int(df_tuesday_sprinter['Seats'].min() // 1000)
-        max_seat = int(df_tuesday_sprinter['Seats'].max() // 1000)
     elif line_set == 'PlotDataWednesday':
         folium_map = add_lines_to_map(folium_map, df_wednesday)
         min_seat = int(df_wednesday['Seats'].min() // 1000)
         max_seat = int(df_wednesday['Seats'].max() // 1000)
-    elif line_set == 'PlotDataWednesdayintercities':
-        folium_map = add_lines_to_map(folium_map, df_wednesday_interc)
-        min_seat = int(df_wednesday_interc['Seats'].min() // 1000)
-        max_seat = int(df_wednesday_interc['Seats'].max() // 1000)
-    elif line_set == 'PlotDataWednesdayprinters':
-        folium_map = add_lines_to_map(folium_map, df_wednesday_sprinter)
-        min_seat = int(df_wednesday_sprinter['Seats'].min() // 1000)
-        max_seat = int(df_wednesday_sprinter['Seats'].max() // 1000)
     elif line_set == 'PlotDataThursday':
         folium_map = add_lines_to_map(folium_map, df_thursday)
         min_seat = int(df_thursday['Seats'].min() // 1000)
         max_seat = int(df_thursday['Seats'].max() // 1000)
-    elif line_set == 'PlotDataThursdayintercities':
-        folium_map = add_lines_to_map(folium_map, df_thursday_interc)
-        min_seat = int(df_thursday_interc['Seats'].min() // 1000)
-        max_seat = int(df_thursday_interc['Seats'].max() // 1000)
-    elif line_set == 'PlotDataThursdayprinters':
-        folium_map = add_lines_to_map(folium_map, df_thursday_sprinter)
-        min_seat = int(df_thursday_sprinter['Seats'].min() // 1000)
-        max_seat = int(df_thursday_sprinter['Seats'].max() // 1000)
     elif line_set == 'PlotDataFriday':
         folium_map = add_lines_to_map(folium_map, df_friday)
         min_seat = int(df_friday['Seats'].min() // 1000)
         max_seat = int(df_friday['Seats'].max() // 1000)
-    elif line_set == 'PlotDataFridayintercities':
-        folium_map = add_lines_to_map(folium_map, df_friday_interc)
-        min_seat = int(df_friday_interc['Seats'].min() // 1000)
-        max_seat = int(df_friday_interc['Seats'].max() // 1000)
-    elif line_set == 'PlotDataFridayprinters':
-        folium_map = add_lines_to_map(folium_map, df_friday_sprinter)
-        min_seat = int(df_friday_sprinter['Seats'].min() // 1000)
-        max_seat = int(df_friday_sprinter['Seats'].max() // 1000)
     elif line_set == 'PlotDataSaturday':
         folium_map = add_lines_to_map(folium_map, df_saturday)
         min_seat = int(df_saturday['Seats'].min() // 1000)
         max_seat = int(df_saturday['Seats'].max() // 1000)
-    elif line_set == 'PlotDataSaturdayintercities':
-        folium_map = add_lines_to_map(folium_map, df_saturday_interc)
-        min_seat = int(df_saturday_interc['Seats'].min() // 1000)
-        max_seat = int(df_saturday_interc['Seats'].max() // 1000)
-    elif line_set == 'PlotDataSaturdayprinters':
-        folium_map = add_lines_to_map(folium_map, df_saturday_sprinter)
-        min_seat = int(df_saturday_sprinter['Seats'].min() // 1000)
-        max_seat = int(df_saturday_sprinter['Seats'].max() // 1000)
     elif line_set == 'PlotDataSunday':
         folium_map = add_lines_to_map(folium_map, df_sunday)
         min_seat = int(df_sunday['Seats'].min() // 1000)
         max_seat = int(df_sunday['Seats'].max() // 1000)
-    elif line_set == 'PlotDataSundayintercities':
-        folium_map = add_lines_to_map(folium_map, df_sunday_interc)
-        min_seat = int(df_sunday_interc['Seats'].min() // 1000)
-        max_seat = int(df_sunday_interc['Seats'].max() // 1000)
-    elif line_set == 'PlotDataSundayprinters':
-        folium_map = add_lines_to_map(folium_map, df_sunday_sprinter)
-        min_seat = int(df_sunday_sprinter['Seats'].min() // 1000)
-        max_seat = int(df_sunday_sprinter['Seats'].max() // 1000)
     # Add selected station types to the map (if any)
     folium_map = add_stations_to_map(folium_map, stations, station_type, selected_type_codes)
 

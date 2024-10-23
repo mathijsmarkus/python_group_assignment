@@ -26,7 +26,7 @@ This question will be answered by answering the following sub-questions:
 - How do other rail transporting companies compare to the NS?""")
 
 st.header('2. Introduction')
-st.write("""Every day, more than 1 million passengers use the services of the Dutch natioanl railway company, Nederlandse Spoorwegen (NS). 
+st.write("""Every day, more than 1 million passengers use the services of the Dutch national railway company, Nederlandse Spoorwegen (NS). 
          The NS has the concession to run the main rail routes in the Netherlands and operates with 4800 train rides and 260.000 seats per day with Sprinters and Intercity’s. 
          Every year the train schedule is updated and changes are made. Different tracks in the network have different frequencies of train service, which leads to different capacity between cities. 
          To understand and map those differences this project is set up. With databases from the NS an overview is made of the seat capacity between cities on the main rail route. 
@@ -44,9 +44,24 @@ st.write("""The Netherlands is a small country, but even it has significant regi
          So, it is expected that the public transport capacity in the Randstad will be significantly higher than in the rest of the country. Seeing figure x, this is the case.""")    
 st.write("**insert visual**")
 st.write("""In the figure above the stations within the Randstad are displayed with a darker gray color than the non-Randstad stations.
-         The Randstad has both a bigger density of stations and aall of the red lines(high seat capacity) can be found in the Randstad.
-         **Text about graph/tables @Alene**""")
-         
+         The Randstad has both a bigger density of stations and all of the red lines(high seat capacity) can be found in the Randstad.
+         This can be confirmed by the average amout of trips for the trajectories in the Randstad compared by the tranjectories outside of the Randstad.""")
+st.write("""Randstad = 846768,
+         Non-Randstad = 262787""")
+st.write("""So, the train services in the Randstad have on average more than three times the capacity than their non-Randstad counterparts.
+         Next up there will be looked at the trajectories with the highest and lowest capacity.
+         These are shown in the tables down below:""") 
+
+df_max = pd.read_csv("Streamlit_report/max_trajectories.csv")  
+st.caption("Tabe 1: Trajectories with highest capacity") 
+st.table(df_max)
+
+st.caption("Table 2: Trajectories with lowest capacity")
+df_min = pd.read_csv("Streamlit_report/min_trajectories.csv")   
+st.table(df_min)
+
+st.write("""The trajectories from Table 1 are all situated in the Randstad, while the ones in Table 2 are all outside the randstad.
+         This even more accentuates the big differences in these regions""")
 
 st.header('4. Analysis seat capacity for every day of the week ')
 st.write("""It is obvious that on some days there is a higher transport demand than on other days. 
