@@ -14,6 +14,7 @@ st.write("Alene Hooiveld - 5310539   \n Matthijs Markus - 5405416   \n Thijs Dae
 st.write('Delft, October 25th 2024')
 
 st.header('1. Research objectives')
+
 st.write("""The main research question of this study is:  What are the seat capacities of the train network in the current NS time schedule? 
 
 This question will be answered by answering the following sub-questions: 
@@ -37,6 +38,7 @@ st.write("""Every day, more than 1 million passengers use the services of the Du
 st.write("""To make the python script and visualisations in this report the following steps were taken: **@uitleg pythonstrijders**""")
 
 st.write(""""The results are visualised in a interactive map (chapter 6), this is the main delivearble of this project and all sub-questions are answered by using this map""")
+st.markdown("[Go to 6. Interactive Map](#6-interactive-map)")
 
 st.header('3. Analysis seat capacity in- and outside the Randstad ')
 st.write("""The Netherlands is a small country, but even it has significant regional differences.
@@ -73,6 +75,8 @@ st.write("""It is obvious that on some days there is a higher transport demand t
          So it is expected that the capacity of the railway network would reflect that.
          In the interactive streamlit visual it is possible to look at the capacity for each individual day of the week.""") 
 st.write("""**insert visual**""")
+st.markdown("[Go to 6. Interactive Map](#6-interactive-map)")
+
 
 st.write("""In the figure it is clear that the capcity does not show significant differences between monday up to friday, 
          but there is a visable difference between the work week and the weekend. 
@@ -87,8 +91,12 @@ st.write("""The NS makes a distinct difference between Sprinters an InterCity tr
          while InterCitys are used to transport people between bigger hubs with high speed but skip a lot of smaller stations.
          But what type of train has the higher capacity? In the figure it shows that...""")
 st.write("""**insert visual**""")
+st.markdown("[Go to 6. Interactive Map](#6-interactive-map)")
 
-st.header('6. Interactive map')
+
+st.image('Streamlit_report/nog een mooie graph.png')
+
+st.markdown("## 6. Interactive Map")
 
 # Path to the other .py file
 other_file_path = 'map_app_main.py'
