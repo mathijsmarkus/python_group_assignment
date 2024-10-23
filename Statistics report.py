@@ -34,6 +34,9 @@ def graph_differences():
     plt.ylabel('Total Seats')
     plt.xticks(rotation=45)
     plt.grid(axis='y')
+    plt.show()
+
+graph_differences()
 
 
 
@@ -74,7 +77,7 @@ def difference_week_top10():
     df2 = pd.DataFrame(df)
     df2.to_excel('Results', sheet_name = 'Difference', index=False)
 
-difference_week_top10()
+#difference_week_top10()
 
 def difference_randstad():
     df1 = pd.read_csv(randstad)
