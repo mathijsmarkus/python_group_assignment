@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+
 st.title('Group project - TIL6022')
 st.subheader('Group 6')
 
@@ -35,16 +36,18 @@ st.write("""Every day, more than 1 million passengers use the services of the Du
 
 st.write("""To make the python script and visualisations in this report the following steps were taken: **@uitleg pythonstrijders**""")
 
+st.write(""""The results are visualised in a interactive map (chapter 6), this is the main delivearble of this project and all sub-questions are answered by using this map""")
+
 st.header('3. Analysis seat capacity in- and outside the Randstad ')
 st.write("""The Netherlands is a small country, but even it has significant regional differences.
          The biggest of this differences can be noticed by looking at the Randstad region. 
          This is the main economic and political hub and of the country and contains most of the big cities. 
          Therefore it is much more developed than other parts of the Netherlands.
          The Randstad is also sometimes counted as one big city conglomeration because of the interconectivity between the cities.
-         So, it is expected that the public transport capacity in the Randstad will be significantly higher than in the rest of the country. Seeing figure x, this is the case.""")    
-st.write("**insert visual**")
+         So, it is expected that the public transport capacity in the Randstad will be significantly higher than in the rest of the country. 
+         Looking at the interactive map in chapter 6, this is the case.""")    
 
-st.write("""In the figure above the stations within the Randstad are displayed with a darker gray color than the non-Randstad stations.
+st.write("""In the interactive map, the stations within the Randstad are displayed with a darker gray color than the non-Randstad stations.
          The Randstad has both a bigger density of stations and all of the red lines(high seat capacity) can be found in the Randstad.
          This can be confirmed by the average amout of trips for the trajectories in the Randstad compared by the tranjectories outside of the Randstad.""")
 st.write("""Randstad = 846768,
@@ -76,6 +79,8 @@ st.write("""In the figure it is clear that the capcity does not show significant
          To look at these differences in more detail the following graph shows the total capacity for each day of teh week:
          **grafiek beuenen**""")
 
+st.image('Streamlit_report/mooie graph.png')
+
 st.header('5. Analysis seat capacity of Sprinters and InterCity’s ')
 st.write("""The NS makes a distinct difference between Sprinters an InterCity trains.
          Sprinter are meant to travel short distances with quick accereration but stop at every small station, 
@@ -96,5 +101,6 @@ with open(other_file_path) as f:
 exec(code)
 
 st.header('6. Discussion')
-
+st.write('RNET tussen alphen en gouda is van NS maar staat niet in de database')
 st.header('7. Contribution statement')
+

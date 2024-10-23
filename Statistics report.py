@@ -28,23 +28,22 @@ def graph_differences():
         total_days.append(total_seats)
     
     plt.figure(figsize=(10, 6))
-    plt.line(days, total_days, color='skyblue')
+    plt.bar(days, total_days, color='skyblue')
     plt.title('Total Seats per Day')
     plt.xlabel('Days of the Week')
     plt.ylabel('Total Seats')
     plt.xticks(rotation=45)
     plt.grid(axis='y')
-    plt.show()
-
-graph_differences()
 
 
 
 def difference_week_top10():
+
     week = pd.concat([monday, tuesday, wednesday, thursday, friday, saturday, sunday], axis=0)
 
     df = []
     for index, row in week.iterrows():
+        print(f'{index+1}/{len(row)}', end="\r")
         From = row['From']
         To = row['To']
             
@@ -75,9 +74,11 @@ def difference_week_top10():
                 })
 
     df2 = pd.DataFrame(df)
-    df2.to_excel('Results', sheet_name = 'Difference', index=False)
+    df2.sort_values()
+    df2.head(20)
+    #df2.to_excel('Results', sheet_name = 'Difference', index=False)
 
-#difference_week_top10()
+difference_week_top10()
 
 def difference_randstad():
     df1 = pd.read_csv(randstad)
