@@ -11,64 +11,65 @@ def min_max_week():
     print(sorted_df.tail(10)) 
 
 #Difference during the week
-monday = pd.read_csv('OutputData/SeatsPerTrajectoryMonday.csv', index_col = 'Unnamed: 0')
-tuesday = pd.read_csv('OutputData/SeatsPerTrajectoryTuesday.csv', index_col = 'Unnamed: 0')
-wednesday = pd.read_csv('OutputData/SeatsPerTrajectoryWednesday.csv', index_col = 'Unnamed: 0')
-thursday = pd.read_csv('OutputData/SeatsPerTrajectoryThursday.csv', index_col = 'Unnamed: 0')
-friday = pd.read_csv('OutputData/SeatsPerTrajectoryFriday.csv', index_col = 'Unnamed: 0')
-saturday = pd.read_csv('OutputData/SeatsPerTrajectorySaturday.csv', index_col = 'Unnamed: 0')
-sunday = pd.read_csv('OutputData/SeatsPerTrajectorySunday.csv', index_col = 'Unnamed: 0')
+import pandas as pd
 
+# Load the CSV files for each day of the week
+monday = pd.read_csv('OutputData/SeatsPerTrajectoryMonday.csv', index_col='Unnamed: 0')
+tuesday = pd.read_csv('OutputData/SeatsPerTrajectoryTuesday.csv', index_col='Unnamed: 0')
+wednesday = pd.read_csv('OutputData/SeatsPerTrajectoryWednesday.csv', index_col='Unnamed: 0')
+thursday = pd.read_csv('OutputData/SeatsPerTrajectoryThursday.csv', index_col='Unnamed: 0')
+friday = pd.read_csv('OutputData/SeatsPerTrajectoryFriday.csv', index_col='Unnamed: 0')
+saturday = pd.read_csv('OutputData/SeatsPerTrajectorySaturday.csv', index_col='Unnamed: 0')
+sunday = pd.read_csv('OutputData/SeatsPerTrajectorySunday.csv', index_col='Unnamed: 0')
 
+# Concatenate data for the whole week
+week = pd.concat([monday, tuesday, wednesday, thursday, friday, saturday, sunday], axis=0)
 
-week = pd.concat([monday, tuesday, wednesday, thursday, friday, saturday, sunday], axis = 1)
-print(week)
-
-df = pd.DataFrame(columns=['From', 'To', 'Difference', 'Maximum seats', 'Minimum seats'])
-for i in week.iloc[:, 14]:
-    if isinstance(i, float):
-        index = df.index[df[14] == i]
-        maxvalue = week.iloc[index, 2]
-        minvalue = week.iloc[index, 2]
-
-        seat_columns = [2, 5, 8, 11, 17, 20]
-        for j in seat_columns:
-            if week.iloc[value, j] > maxvalue:
-                maxvalue = week.iloc[value, j]
-            if week.iloc[value,j] < minvalue:
-                minvalue = week.iloc[value,j]
-    
-        From = week.iloc[value, 0]
-        To = week.iloc[value, 1]
+# Initialize a list to store results
+df = []
+# Iterate over each row in the week dataframe
+for index, row in week.iterrows():
+    From = row['From']
+    To = row['To']
+        
+        # Initialize max and min seat values
+    maxvalue = float('-inf')  # Start with negative infinity
+    minvalue = float('inf')   # Start with positive infinity
+        
+        # Go over all rows again to find matching From/To pairs and compare seat values
+    for x in range(len(week)):
+        current_from = week.iloc[x]['From']
+        current_to = week.iloc[x]['To']
+            
+            # If the current From/To pair matches the original
+        if From == current_from and To == current_to:
+            current_seat_value = week.iloc[x]['Seats']
+                
+                # Ensure the seat value is valid and compare it to max/min values
+            if pd.notnull(current_seat_value):
+                if current_seat_value > maxvalue:
+                    maxvalue = current_seat_value
+                if current_seat_value < minvalue:
+                    minvalue = current_seat_value
+        
+        # If valid max and min values were found, calculate the difference
+    if maxvalue != float('-inf') and minvalue != float('inf'):
         difference = maxvalue - minvalue
-
-        df = df.append({
+        df.append({
             'From': From,
             'To': To,
             'Difference': difference,
             'Maximum seats': maxvalue,
             'Minimum seats': minvalue
-        }, ignore_index=True)
+            })
 
-print(df)
+# Convert the list of results into a DataFrame
+df2 = pd.DataFrame(df)
 
+# Display the resulting DataFrame
+print(df2)
 
-
-
-
-
-#df1 = []
-#for i in list1:
-    #for j in i:
-        #df1['Unnamed: 0'] = 
-        #maxvalue = 0
-        #minvalue = None
-        #if j > maxvalue:
-            #maxvalue = j
-        #if minvalue == None:
-            #minvalue = j
-        #elif j < minvalue:
-            #minvalue = j
+df2.sort()
 
 def difference_randstad():
     df1 = pd.read_csv(randstad)
