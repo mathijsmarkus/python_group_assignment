@@ -199,22 +199,24 @@ def main():
     initial_center = [52.0907, 6.1214]  # Utrecht coordinates
     initial_zoom = 7
 
-    # Sidebar for line set selection (all combinations)
-    line_set = st.sidebar.selectbox(
-        "Select dataset to display:",
-        options=[
-            'PlotDataWeekall', 'PlotDataWeekintercities', 'PlotDataWeeksprinters',
-            'PlotDataMonday', 'PlotDataMondayintercities', 'PlotDataMondayprinters',
-            'PlotDataTuesday', 'PlotDataTuesdayintercities', 'PlotDataTuesdayprinters',
-            'PlotDataWednesday', 'PlotDataWednesdayintercities', 'PlotDataWednesdayprinters',
-            'PlotDataThursday', 'PlotDataThursdayintercities', 'PlotDataThursdayprinters',
-            'PlotDataFriday', 'PlotDataFridayintercities', 'PlotDataFridayprinters',
-            'PlotDataSaturday', 'PlotDataSaturdayintercities', 'PlotDataSaturdayprinters',
-            'PlotDataSunday', 'PlotDataSundayintercities', 'PlotDataSundayprinters'
-        ],
-        index=0,  # Set default index to 0 (PlotDataWeekall)
-        format_func=lambda x: x.replace("PlotData", "Data for "),  # Custom display names
-        key="line_set_selectbox"  # Unique key for the line set selectbox
+    days_of_week = [
+    'Week', 'Monday', 'Tuesday', 'Wednesday', 
+    'Thursday', 'Friday', 'Saturday', 'Sunday'
+    ]
+    selected_day = st.sidebar.selectbox(
+        "Select a day of the week:",
+        options=days_of_week,
+        index=0,  # Default to 'Week'
+        key="day_selectbox"  # Unique key for the day selectbox
+    )
+
+        # Sidebar for train type selection
+    train_types = ['All', 'Intercity', 'Sprinters']
+    selected_train_type = st.sidebar.selectbox(
+        "Select train type:",
+        options=train_types,
+        index=0,  # Default to 'All'
+        key="train_type_selectbox"  # Unique key for the train type selectbox
     )
 
     # Sidebar selection for Randstad types
@@ -236,109 +238,123 @@ def main():
         key="type_code_multiselect"  # Unique key for the type code multiselect
     )
 
-    # Draw the initial map
-    folium_map = draw_map(initial_center, initial_zoom)
+    # Determine the dataset to use based on selections
+    if selected_day == 'Week':
+        line_set = 'PlotDataWeekall' if selected_train_type == 'All' else f'PlotDataWeek{selected_train_type.lower()}'
+    else:
+        line_set = f'PlotData{selected_day}{selected_train_type.lower()}'
 
     # Debug: Print selected line set
     st.write(f"Selected dataset: {line_set}")
 
+    # Draw the initial map
+    folium_map = draw_map(initial_center, initial_zoom)
+
     # Add the selected line set to the map
-    if line_set == 'PlotDataWeekall':
-        folium_map = add_lines_to_map(folium_map, df_week_all)
-        min_seat = int(df_week_all['Seats'].min() // 1000)
-        max_seat = int(df_week_all['Seats'].max() // 1000)
-    elif line_set == 'PlotDataWeekintercities':
-        folium_map = add_lines_to_map(folium_map, df_week_interc)
-        min_seat = int(df_week_interc['Seats'].min() // 1000)
-        max_seat = int(df_week_interc['Seats'].max() // 1000)
-    elif line_set == 'PlotDataWeeksprinters':
-        folium_map = add_lines_to_map(folium_map, df_week_sprinter)
-        min_seat = int(df_week_sprinter['Seats'].min() // 1000)
-        max_seat = int(df_week_sprinter['Seats'].max() // 1000)
-    elif line_set == 'PlotDataMonday':
-        folium_map = add_lines_to_map(folium_map, df_monday)
-        min_seat = int(df_monday['Seats'].min() // 1000)
-        max_seat = int(df_monday['Seats'].max() // 1000)
-    elif line_set == 'PlotDataMondayintercities':
-        folium_map = add_lines_to_map(folium_map, df_monday_interc)
-        min_seat = int(df_monday_interc['Seats'].min() // 1000)
-        max_seat = int(df_monday_interc['Seats'].max() // 1000)
-    elif line_set == 'PlotDataMondayprinters':
-        folium_map = add_lines_to_map(folium_map, df_monday_sprinter)
-        min_seat = int(df_monday_sprinter['Seats'].min() // 1000)
-        max_seat = int(df_monday_sprinter['Seats'].max() // 1000)
-    elif line_set == 'PlotDataTuesday':
-        folium_map = add_lines_to_map(folium_map, df_tuesday)
-        min_seat = int(df_tuesday['Seats'].min() // 1000)
-        max_seat = int(df_tuesday['Seats'].max() // 1000)
-    elif line_set == 'PlotDataTuesdayintercities':
-        folium_map = add_lines_to_map(folium_map, df_tuesday_interc)
-        min_seat = int(df_tuesday_interc['Seats'].min() // 1000)
-        max_seat = int(df_tuesday_interc['Seats'].max() // 1000)
-    elif line_set == 'PlotDataTuesdayprinters':
-        folium_map = add_lines_to_map(folium_map, df_tuesday_sprinter)
-        min_seat = int(df_tuesday_sprinter['Seats'].min() // 1000)
-        max_seat = int(df_tuesday_sprinter['Seats'].max() // 1000)
-    elif line_set == 'PlotDataWednesday':
-        folium_map = add_lines_to_map(folium_map, df_wednesday)
-        min_seat = int(df_wednesday['Seats'].min() // 1000)
-        max_seat = int(df_wednesday['Seats'].max() // 1000)
-    elif line_set == 'PlotDataWednesdayintercities':
-        folium_map = add_lines_to_map(folium_map, df_wednesday_interc)
-        min_seat = int(df_wednesday_interc['Seats'].min() // 1000)
-        max_seat = int(df_wednesday_interc['Seats'].max() // 1000)
-    elif line_set == 'PlotDataWednesdayprinters':
-        folium_map = add_lines_to_map(folium_map, df_wednesday_sprinter)
-        min_seat = int(df_wednesday_sprinter['Seats'].min() // 1000)
-        max_seat = int(df_wednesday_sprinter['Seats'].max() // 1000)
-    elif line_set == 'PlotDataThursday':
-        folium_map = add_lines_to_map(folium_map, df_thursday)
-        min_seat = int(df_thursday['Seats'].min() // 1000)
-        max_seat = int(df_thursday['Seats'].max() // 1000)
-    elif line_set == 'PlotDataThursdayintercities':
-        folium_map = add_lines_to_map(folium_map, df_thursday_interc)
-        min_seat = int(df_thursday_interc['Seats'].min() // 1000)
-        max_seat = int(df_thursday_interc['Seats'].max() // 1000)
-    elif line_set == 'PlotDataThursdayprinters':
-        folium_map = add_lines_to_map(folium_map, df_thursday_sprinter)
-        min_seat = int(df_thursday_sprinter['Seats'].min() // 1000)
-        max_seat = int(df_thursday_sprinter['Seats'].max() // 1000)
-    elif line_set == 'PlotDataFriday':
-        folium_map = add_lines_to_map(folium_map, df_friday)
-        min_seat = int(df_friday['Seats'].min() // 1000)
-        max_seat = int(df_friday['Seats'].max() // 1000)
-    elif line_set == 'PlotDataFridayintercities':
-        folium_map = add_lines_to_map(folium_map, df_friday_interc)
-        min_seat = int(df_friday_interc['Seats'].min() // 1000)
-        max_seat = int(df_friday_interc['Seats'].max() // 1000)
-    elif line_set == 'PlotDataFridayprinters':
-        folium_map = add_lines_to_map(folium_map, df_friday_sprinter)
-        min_seat = int(df_friday_sprinter['Seats'].min() // 1000)
-        max_seat = int(df_friday_sprinter['Seats'].max() // 1000)
-    elif line_set == 'PlotDataSaturday':
-        folium_map = add_lines_to_map(folium_map, df_saturday)
-        min_seat = int(df_saturday['Seats'].min() // 1000)
-        max_seat = int(df_saturday['Seats'].max() // 1000)
-    elif line_set == 'PlotDataSaturdayintercities':
-        folium_map = add_lines_to_map(folium_map, df_saturday_interc)
-        min_seat = int(df_saturday_interc['Seats'].min() // 1000)
-        max_seat = int(df_saturday_interc['Seats'].max() // 1000)
-    elif line_set == 'PlotDataSaturdayprinters':
-        folium_map = add_lines_to_map(folium_map, df_saturday_sprinter)
-        min_seat = int(df_saturday_sprinter['Seats'].min() // 1000)
-        max_seat = int(df_saturday_sprinter['Seats'].max() // 1000)
-    elif line_set == 'PlotDataSunday':
-        folium_map = add_lines_to_map(folium_map, df_sunday)
-        min_seat = int(df_sunday['Seats'].min() // 1000)
-        max_seat = int(df_sunday['Seats'].max() // 1000)
-    elif line_set == 'PlotDataSundayintercities':
-        folium_map = add_lines_to_map(folium_map, df_sunday_interc)
-        min_seat = int(df_sunday_interc['Seats'].min() // 1000)
-        max_seat = int(df_sunday_interc['Seats'].max() // 1000)
-    elif line_set == 'PlotDataSundayprinters':
-        folium_map = add_lines_to_map(folium_map, df_sunday_sprinter)
-        min_seat = int(df_sunday_sprinter['Seats'].min() // 1000)
-        max_seat = int(df_sunday_sprinter['Seats'].max() // 1000)
+    if selected_day == "Week":
+        if selected_train_type == 'All':
+            folium_map = add_lines_to_map(folium_map, df_week_all)
+            min_seat = int(df_week_all['Seats'].min() // 1000)
+            max_seat = int(df_week_all['Seats'].max() // 1000)
+        elif selected_train_type == 'Intercity':
+            folium_map = add_lines_to_map(folium_map, df_week_interc)
+            min_seat = int(df_week_interc['Seats'].min() // 1000)
+            max_seat = int(df_week_interc['Seats'].max() // 1000)
+        elif selected_train_type == 'Sprinters':
+            folium_map = add_lines_to_map(folium_map, df_week_sprinter)
+            min_seat = int(df_week_sprinter['Seats'].min() // 1000)
+            max_seat = int(df_week_sprinter['Seats'].max() // 1000)
+    elif selected_day == 'Monday':
+        if selected_train_type == 'All':
+            folium_map = add_lines_to_map(folium_map, df_monday)
+            min_seat = int(df_monday['Seats'].min() // 1000)
+            max_seat = int(df_monday['Seats'].max() // 1000)
+        elif selected_train_type == 'Intercity':
+            folium_map = add_lines_to_map(folium_map, df_monday_interc)
+            min_seat = int(df_monday_interc['Seats'].min() // 1000)
+            max_seat = int(df_monday_interc['Seats'].max() // 1000)
+        elif selected_train_type == 'Sprinters':
+            folium_map = add_lines_to_map(folium_map, df_monday_sprinter)
+            min_seat = int(df_monday_sprinter['Seats'].min() // 1000)
+            max_seat = int(df_monday_sprinter['Seats'].max() // 1000)
+    elif selected_day == 'Tuesday':
+        if selected_train_type == 'All':
+            folium_map = add_lines_to_map(folium_map, df_tuesday)
+            min_seat = int(df_tuesday['Seats'].min() // 1000)
+            max_seat = int(df_tuesday['Seats'].max() // 1000)
+        elif selected_train_type == 'Intercity':
+            folium_map = add_lines_to_map(folium_map, df_tuesday_interc)
+            min_seat = int(df_tuesday_interc['Seats'].min() // 1000)
+            max_seat = int(df_tuesday_interc['Seats'].max() // 1000)
+        elif selected_train_type == 'Sprinters':
+            folium_map = add_lines_to_map(folium_map, df_tuesday_sprinter)
+            min_seat = int(df_tuesday_sprinter['Seats'].min() // 1000)
+            max_seat = int(df_tuesday_sprinter['Seats'].max() // 1000)
+    elif selected_day == 'Wednesday':
+        if selected_train_type == 'All':
+            folium_map = add_lines_to_map(folium_map, df_wednesday)
+            min_seat = int(df_wednesday['Seats'].min() // 1000)
+            max_seat = int(df_wednesday['Seats'].max() // 1000)
+        elif selected_train_type == 'Intercity':
+            folium_map = add_lines_to_map(folium_map, df_wednesday_interc)
+            min_seat = int(df_wednesday_interc['Seats'].min() // 1000)
+            max_seat = int(df_wednesday_interc['Seats'].max() // 1000)
+        elif selected_train_type == 'Sprinters':
+            folium_map = add_lines_to_map(folium_map, df_wednesday_sprinter)
+            min_seat = int(df_wednesday_sprinter['Seats'].min() // 1000)
+            max_seat = int(df_wednesday_sprinter['Seats'].max() // 1000)
+    elif selected_day == 'Thursday':
+        if selected_train_type == 'All':
+            folium_map = add_lines_to_map(folium_map, df_thursday)
+            min_seat = int(df_thursday['Seats'].min() // 1000)
+            max_seat = int(df_thursday['Seats'].max() // 1000)
+        elif selected_train_type == 'Intercity':
+            folium_map = add_lines_to_map(folium_map, df_thursday_interc)
+            min_seat = int(df_thursday_interc['Seats'].min() // 1000)
+            max_seat = int(df_thursday_interc['Seats'].max() // 1000)
+        elif selected_train_type == 'Sprinters':
+            folium_map = add_lines_to_map(folium_map, df_thursday_sprinter)
+            min_seat = int(df_thursday_sprinter['Seats'].min() // 1000)
+            max_seat = int(df_thursday_sprinter['Seats'].max() // 1000)
+    elif selected_day == 'Friday':
+        if selected_train_type == 'All':
+            folium_map = add_lines_to_map(folium_map, df_friday)
+            min_seat = int(df_friday['Seats'].min() // 1000)
+            max_seat = int(df_friday['Seats'].max() // 1000)
+        elif selected_train_type == 'Intercity':
+            folium_map = add_lines_to_map(folium_map, df_friday_interc)
+            min_seat = int(df_friday_interc['Seats'].min() // 1000)
+            max_seat = int(df_friday_interc['Seats'].max() // 1000)
+        elif selected_train_type == 'Sprinters':
+            folium_map = add_lines_to_map(folium_map, df_friday_sprinter)
+            min_seat = int(df_friday_sprinter['Seats'].min() // 1000)
+            max_seat = int(df_friday_sprinter['Seats'].max() // 1000)
+    elif selected_day == 'Saturday':
+        if selected_train_type == 'All':
+            folium_map = add_lines_to_map(folium_map, df_saturday)
+            min_seat = int(df_saturday['Seats'].min() // 1000)
+            max_seat = int(df_saturday['Seats'].max() // 1000)
+        elif selected_train_type == 'Intercity':
+            folium_map = add_lines_to_map(folium_map, df_saturday_interc)
+            min_seat = int(df_saturday_interc['Seats'].min() // 1000)
+            max_seat = int(df_saturday_interc['Seats'].max() // 1000)
+        elif selected_train_type == 'Sprinters':
+            folium_map = add_lines_to_map(folium_map, df_saturday_sprinter)
+            min_seat = int(df_saturday_sprinter['Seats'].min() // 1000)
+            max_seat = int(df_saturday_sprinter['Seats'].max() // 1000)
+    elif selected_day == 'Sunday':
+        if selected_train_type == 'All':
+            folium_map = add_lines_to_map(folium_map, df_sunday)
+            min_seat = int(df_sunday['Seats'].min() // 1000)
+            max_seat = int(df_sunday['Seats'].max() // 1000)
+        elif selected_train_type == 'Intercity':
+            folium_map = add_lines_to_map(folium_map, df_sunday_interc)
+            min_seat = int(df_sunday_interc['Seats'].min() // 1000)
+            max_seat = int(df_sunday_interc['Seats'].max() // 1000)
+        elif selected_train_type == 'Sprinters':
+            folium_map = add_lines_to_map(folium_map, df_sunday_sprinter)
+            min_seat = int(df_sunday_sprinter['Seats'].min() // 1000)
+            max_seat = int(df_sunday_sprinter['Seats'].max() // 1000)
 
     # Add selected station types to the map (if any)
     folium_map = add_stations_to_map(folium_map, stations, station_type, selected_type_codes)
