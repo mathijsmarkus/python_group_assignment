@@ -44,16 +44,6 @@ st.write("""The Netherlands is a small country, but even it has significant regi
          So, it is expected that the public transport capacity in the Randstad will be significantly higher than in the rest of the country. Seeing figure x, this is the case.""")    
 st.write("**insert visual**")
 
-# Path to the other .py file
-#other_file_path = 'map_app_main.py'
-
-# Open and read the content of the external Streamlit file
-#with open(other_file_path) as f:
-    #code = f.read()
-
-# Execute the code in the other file
-#exec(code)
-
 st.write("""In the figure above the stations within the Randstad are displayed with a darker gray color than the non-Randstad stations.
          The Randstad has both a bigger density of stations and all of the red lines(high seat capacity) can be found in the Randstad.
          This can be confirmed by the average amout of trips for the trajectories in the Randstad compared by the tranjectories outside of the Randstad.""")
@@ -80,6 +70,7 @@ st.write("""It is obvious that on some days there is a higher transport demand t
          So it is expected that the capacity of the railway network would reflect that.
          In the interactive streamlit visual it is possible to look at the capacity for each individual day of the week.""") 
 st.write("""**insert visual**""")
+
 st.write("""In the figure it is clear that the capcity does not show significant differences between monday up to friday, 
          but there is a visable difference between the work week and the weekend. 
          To look at these differences in more detail the following graph shows the total capacity for each day of teh week:
@@ -91,6 +82,18 @@ st.write("""The NS makes a distinct difference between Sprinters an InterCity tr
          while InterCitys are used to transport people between bigger hubs with high speed but skip a lot of smaller stations.
          But what type of train has the higher capacity? In the figure it shows that...""")
 st.write("""**insert visual**""")
+
+st.header('6. Interactive map')
+
+# Path to the other .py file
+other_file_path = 'map_app_main.py'
+
+# Open and read the content of the external Streamlit file
+with open(other_file_path) as f:
+    code = f.read()
+
+# Execute the code in the other file
+exec(code)
 
 st.header('6. Discussion')
 

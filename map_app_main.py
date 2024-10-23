@@ -155,7 +155,7 @@ def add_station_marker(m, row):
 
 # Main function for Streamlit
 def main():
-    st.title("Intensity of Rail Use")
+    st.subheader("Intensity of Rail Use")
     st.write("The map below shows the intensity of each piece of rail in The Netherlands. The map is adjustable. \
               Different station types can be selected, as well as different transport operators.")
 
