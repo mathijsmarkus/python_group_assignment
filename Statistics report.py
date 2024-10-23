@@ -43,7 +43,7 @@ def difference_week_top10():
 
     df = []
     for index, row in week.iterrows():
-        print(f'{index+1}/{len(row)}', end="\r")
+        print(f'{index+1}/{len(thursday.iloc[0])}', end="\r")
         From = row['From']
         To = row['To']
             
@@ -74,7 +74,7 @@ def difference_week_top10():
                 })
 
     df2 = pd.DataFrame(df)
-    df2.sort_values()
+    df2.sort_values(by = 'Difference', ascending = False)
     df2.head(20)
     #df2.to_excel('Results', sheet_name = 'Difference', index=False)
 
