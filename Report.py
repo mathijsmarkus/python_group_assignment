@@ -8,7 +8,7 @@ st.subheader('Group 6')
 st.image('Streamlit_report/report_front_image.jpg')
 
 st.write("**Members**")
-st.write("Alene Hooiveld - 5310539   \n Matthijs Markus - 5405416 \n Thijs Daemen - 5289491    \n Niels van der Rijst - 5380162    \n Chris Juárez Overdevest - 5171806")
+st.write("Alene Hooiveld - 5310539   \n Matthijs Markus - 5405416   \n Thijs Daemen - 5289491   \n Niels van der Rijst - 5380162    \n Chris Juárez Overdevest - 5171806")
 
 st.write('Delft, October 25th 2024')
 
@@ -43,6 +43,7 @@ st.write("""The Netherlands is a small country, but even it has significant regi
          The Randstad is also sometimes counted as one big city conglomeration because of the interconectivity between the cities.
          So, it is expected that the public transport capacity in the Randstad will be significantly higher than in the rest of the country. Seeing figure x, this is the case.""")    
 st.write("**insert visual**")
+
 st.write("""In the figure above the stations within the Randstad are displayed with a darker gray color than the non-Randstad stations.
          The Randstad has both a bigger density of stations and all of the red lines(high seat capacity) can be found in the Randstad.
          This can be confirmed by the average amout of trips for the trajectories in the Randstad compared by the tranjectories outside of the Randstad.""")
@@ -69,17 +70,30 @@ st.write("""It is obvious that on some days there is a higher transport demand t
          So it is expected that the capacity of the railway network would reflect that.
          In the interactive streamlit visual it is possible to look at the capacity for each individual day of the week.""") 
 st.write("""**insert visual**""")
+
 st.write("""In the figure it is clear that the capcity does not show significant differences between monday up to friday, 
          but there is a visable difference between the work week and the weekend. 
          To look at these differences in more detail the following graph shows the total capacity for each day of teh week:
          **grafiek beuenen**""")
 
 st.header('5. Analysis seat capacity of Sprinters and InterCity’s ')
-st.write("""The NS makes a distinct difference between Srinters an InterCity trains.
+st.write("""The NS makes a distinct difference between Sprinters an InterCity trains.
          Sprinter are meant to travel short distances with quick accereration but stop at every small station, 
          while InterCitys are used to transport people between bigger hubs with high speed but skip a lot of smaller stations.
          But what type of train has the higher capacity? In the figure it shows that...""")
 st.write("""**insert visual**""")
+
+st.header('6. Interactive map')
+
+# Path to the other .py file
+other_file_path = 'map_app_main.py'
+
+# Open and read the content of the external Streamlit file
+with open(other_file_path) as f:
+    code = f.read()
+
+# Execute the code in the other file
+exec(code)
 
 st.header('6. Discussion')
 
