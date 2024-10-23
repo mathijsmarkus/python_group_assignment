@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+
 st.title('Group project - TIL6022')
 st.subheader('Group 6')
 
@@ -13,6 +14,7 @@ st.write("Alene Hooiveld - 5310539   \n Matthijs Markus - 5405416   \n Thijs Dae
 st.write('Delft, October 25th 2024')
 
 st.header('1. Research objectives')
+
 st.write("""The main research question of this study is:  What are the seat capacities of the train network in the current NS time schedule? 
 
 This question will be answered by answering the following sub-questions: 
@@ -35,16 +37,19 @@ st.write("""Every day, more than 1 million passengers use the services of the Du
 
 st.write("""To make the python script and visualisations in this report the following steps were taken: **@uitleg pythonstrijders**""")
 
+st.write(""""The results are visualised in a interactive map (chapter 6), this is the main delivearble of this project and all sub-questions are answered by using this map""")
+st.markdown("[Go to 6. Interactive Map](#6-interactive-map)")
+
 st.header('3. Analysis seat capacity in- and outside the Randstad ')
 st.write("""The Netherlands is a small country, but even it has significant regional differences.
          The biggest of this differences can be noticed by looking at the Randstad region. 
          This is the main economic and political hub and of the country and contains most of the big cities. 
          Therefore it is much more developed than other parts of the Netherlands.
          The Randstad is also sometimes counted as one big city conglomeration because of the interconectivity between the cities.
-         So, it is expected that the public transport capacity in the Randstad will be significantly higher than in the rest of the country. Seeing figure x, this is the case.""")    
-st.write("**insert visual**")
+         So, it is expected that the public transport capacity in the Randstad will be significantly higher than in the rest of the country. 
+         Looking at the interactive map in chapter 6, this is the case.""")    
 
-st.write("""In the figure above the stations within the Randstad are displayed with a darker gray color than the non-Randstad stations.
+st.write("""In the interactive map, the stations within the Randstad are displayed with a darker gray color than the non-Randstad stations.
          The Randstad has both a bigger density of stations and all of the red lines(high seat capacity) can be found in the Randstad.
          This can be confirmed by the average amout of trips for the trajectories in the Randstad compared by the tranjectories outside of the Randstad.""")
 st.write("""Randstad = 846768,
@@ -70,11 +75,15 @@ st.write("""It is obvious that on some days there is a higher transport demand t
          So it is expected that the capacity of the railway network would reflect that.
          In the interactive streamlit visual it is possible to look at the capacity for each individual day of the week.""") 
 st.write("""**insert visual**""")
+st.markdown("[Go to 6. Interactive Map](#6-interactive-map)")
+
 
 st.write("""In the figure it is clear that the capcity does not show significant differences between monday up to friday, 
          but there is a visable difference between the work week and the weekend. 
          To look at these differences in more detail the following graph shows the total capacity for each day of teh week:
          **grafiek beuenen**""")
+
+st.image('Streamlit_report/mooie graph.png')
 
 st.header('5. Analysis seat capacity of Sprinters and InterCity’s ')
 st.write("""The NS makes a distinct difference between Sprinters an InterCity trains.
@@ -82,8 +91,12 @@ st.write("""The NS makes a distinct difference between Sprinters an InterCity tr
          while InterCitys are used to transport people between bigger hubs with high speed but skip a lot of smaller stations.
          But what type of train has the higher capacity? In the figure it shows that...""")
 st.write("""**insert visual**""")
+st.markdown("[Go to 6. Interactive Map](#6-interactive-map)")
 
-st.header('6. Interactive map')
+
+st.image('Streamlit_report/nog een mooie graph.png')
+
+st.markdown("## 6. Interactive Map")
 
 # Path to the other .py file
 other_file_path = 'map_app_main.py'
@@ -96,5 +109,6 @@ with open(other_file_path) as f:
 exec(code)
 
 st.header('6. Discussion')
-
+st.write('RNET tussen alphen en gouda is van NS maar staat niet in de database')
 st.header('7. Contribution statement')
+
