@@ -180,8 +180,10 @@ def add_station_marker(m, row):
 # -------------- Main function for Streamlit --------------------
 def main():
     st.subheader("Intensity of Rail Use")
-    st.write("The map below shows the intensity of each piece of rail in The Netherlands. The map is adjustable. \
-              Different station types can be selected, as well as different transport operators.")
+    st.write("The map below shows the intensity of each piece of rail in The Netherlands. The map is adjustable and \
+        several different options can be selected in the side bar. Different station types can be selected for both \
+            inside as outside of the Randstad area. For the whole week option, different transport providers can be \
+                selected. If a particular day of the week is selected, the map is shown for all providers combined")
 
     # Load and process data
     (df_week_all, df_week_interm, df_week_sprinter, 
