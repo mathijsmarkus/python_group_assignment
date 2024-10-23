@@ -1,6 +1,6 @@
 import pandas as pd
 import re
-from pyproj import Transformer
+from pyproj import CRS, Transformer
 import folium
 import streamlit as st
 from matplotlib import colors
@@ -50,34 +50,30 @@ def load_data():
             df_thursday, df_thursday_interm, df_thursday_sprinter,
             df_friday, df_friday_interm, df_friday_sprinter,
             df_saturday, df_saturday_interm, df_saturday_sprinter,
-            df_sunday, df_sunday_interm, df_sunday_sprinter, stations)
+            df_sunday, df_sunday_interm, df_sunday_sprinter, 
+            stations)
 
 # Extract coordinates function with added check for empty geometry
 def extract_coords(geometry_str):
+    # Extract coordinates from the 'LINESTRING' format
     coords = re.findall(r'(-?\d+\.\d+)\s(-?\d+\.\d+)', geometry_str)
-    if not coords:  # If coords is empty, return None
+    if not coords:  # If no coordinates are found, return None
         return None
-    return [tuple(map(float, coord)) for coord in coords]
+    # Swap the coordinates if they are reversed (latitude, longitude)
+    return [(float(lat), float(lon)) for lon, lat in coords]  
 
 # Precompute data processing for lines
 @st.cache_data
 def process_line_data(df):
+    # Extract coordinates from 'geometry' column containing LINESTRING data
     df['coords'] = df['geometry'].apply(extract_coords)
-    df = df.dropna(subset=['coords'])  # Drop rows where 'coords' is None
+    df = df.dropna(subset=['coords'])  # Drop rows where no valid coordinates could be extracted
 
     # Normalize seat capacity to use for color scaling
     df['capacity_norm'] = (df['Seats'] - df['Seats'].min()) / (df['Seats'].max() - df['Seats'].min())
-    
-    transformer = Transformer.from_crs("epsg:32631", "epsg:4326")
-    
-    def convert_coords_to_latlon(coords):
-        x_vals, y_vals = zip(*coords)
-        lat_vals, lon_vals = transformer.transform(x_vals, y_vals)
-        return list(zip(lat_vals, lon_vals))
+    df['latlon_coords'] = df['coords']  
+    return df.dropna(subset=['latlon_coords']) 
 
-    df['latlon_coords'] = df['coords'].apply(lambda x: convert_coords_to_latlon(x) if x is not None else None)
-    
-    return df.dropna(subset=['latlon_coords'])  # Drop rows where 'latlon_coords' could not be computed
 
 # Generate a gradient color based on normalized capacity
 def capacity_color(norm_value):
@@ -159,7 +155,7 @@ def add_station_marker(m, row):
 
 # Main function for Streamlit
 def main():
-    st.title("Intensity of Rail Use")
+    st.subheader("Intensity of Rail Use")
     st.write("The map below shows the intensity of each piece of rail in The Netherlands. The map is adjustable. \
               Different station types can be selected, as well as different transport operators.")
 
@@ -216,24 +212,9 @@ def main():
             'PlotDataSaturday', 'PlotDataSaturdayintercities', 'PlotDataSaturdayprinters',
             'PlotDataSunday', 'PlotDataSundayintercities', 'PlotDataSundayprinters'
         ],
-        format_func=lambda x: x.replace("PlotData", "Data for ")  # Custom display names
-    )
-
-    # Set the default selection to PlotDataWeekall
-    line_set = st.sidebar.selectbox(
-        "Select dataset to display:",
-        options=[
-            'PlotDataWeekall', 'PlotDataWeekintercities', 'PlotDataWeeksprinters',
-            'PlotDataMonday', 'PlotDataMondayintercities', 'PlotDataMondayprinters',
-            'PlotDataTuesday', 'PlotDataTuesdayintercities', 'PlotDataTuesdayprinters',
-            'PlotDataWednesday', 'PlotDataWednesdayintercities', 'PlotDataWednesdayprinters',
-            'PlotDataThursday', 'PlotDataThursdayintercities', 'PlotDataThursdayprinters',
-            'PlotDataFriday', 'PlotDataFridayintercities', 'PlotDataFridayprinters',
-            'PlotDataSaturday', 'PlotDataSaturdayintercities', 'PlotDataSaturdayprinters',
-            'PlotDataSunday', 'PlotDataSundayintercities', 'PlotDataSundayprinters'
-        ],
         index=0,  # Set default index to 0 (PlotDataWeekall)
-        format_func=lambda x: x.replace("PlotData", "Data for ")  # Custom display names
+        format_func=lambda x: x.replace("PlotData", "Data for "),  # Custom display names
+        key="line_set_selectbox"  # Unique key for the line set selectbox
     )
 
     # Sidebar selection for Randstad types
@@ -241,7 +222,8 @@ def main():
         "Select Randstad type to display:",
         options=[0.0, 1.0],
         format_func=lambda x: "Randstad" if x == 1.0 else "Non-Randstad",
-        default=[]
+        default=[],
+        key="station_type_multiselect"  # Unique key for the station type multiselect
     )
 
     # Sidebar selection for Type codes
@@ -250,11 +232,15 @@ def main():
         "Select Type codes to display:",
         options=type_code_options,
         format_func=lambda x: "Intercity station" if x == 1.0 else "Sprinter station",
-        default=[]
+        default=[],
+        key="type_code_multiselect"  # Unique key for the type code multiselect
     )
 
     # Draw the initial map
     folium_map = draw_map(initial_center, initial_zoom)
+
+    # Debug: Print selected line set
+    st.write(f"Selected dataset: {line_set}")
 
     # Add the selected line set to the map
     if line_set == 'PlotDataWeekall':
@@ -353,6 +339,7 @@ def main():
         folium_map = add_lines_to_map(folium_map, df_sunday_sprinter)
         min_seat = int(df_sunday_sprinter['Seats'].min() // 1000)
         max_seat = int(df_sunday_sprinter['Seats'].max() // 1000)
+
     # Add selected station types to the map (if any)
     folium_map = add_stations_to_map(folium_map, stations, station_type, selected_type_codes)
 
