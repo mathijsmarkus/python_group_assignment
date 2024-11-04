@@ -116,7 +116,7 @@ with open(other_file_path) as f:
 # Execute the code in the other file
 exec(code)
 
-st.header('6. Discussion')
+st.header('7. Discussion')
 st.write('RNET tussen alphen en gouda is van NS maar staat niet in de database')
-st.header('7. Contribution statement')
+st.header('8. Contribution statement')
 
