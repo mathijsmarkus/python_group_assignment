@@ -6,7 +6,7 @@ import numpy as np
 st.title('Group project - TIL6022')
 st.subheader('Group 6')
 
-st.image('Streamlit_report/report_front_image.jpg')
+st.image('report_front_image.jpg')
 
 st.write("**Members**")
 st.write("Alene Hooiveld - 5310539   \n Matthijs Markus - 5405416   \n Thijs Daemen - 5289491   \n Niels van der Rijst - 5380162    \n Chris Juárez Overdevest - 5171806")
@@ -58,12 +58,12 @@ st.write("""So, the train services in the Randstad have on average more than thr
          Next up there will be looked at the trajectories with the highest and lowest capacity.
          These are shown in the tables down below:""") 
 
-df_max = pd.read_csv("Streamlit_report/max_trajectories.csv")  
+df_max = pd.read_csv("max_trajectories.csv")  
 st.caption("Tabe 1: Trajectories with highest capacity") 
 st.table(df_max)
 
 st.caption("Table 2: Trajectories with lowest capacity")
-df_min = pd.read_csv("Streamlit_report/min_trajectories.csv")   
+df_min = pd.read_csv("min_trajectories.csv")   
 st.table(df_min)
 
 st.write("""The trajectories from Table 1 are all situated in the Randstad, while the ones in Table 2 are all outside the randstad.
@@ -83,7 +83,15 @@ st.write("""In the figure it is clear that the capcity does not show significant
          To look at these differences in more detail the following graph shows the total capacity for each day of teh week:
          **grafiek beuenen**""")
 
-st.image('Streamlit_report/mooie graph.png')
+st.image('mooie graph.png')
+
+st.write("""Another interesting statistic is the difference in maximum and minimum seat capacity per route during the week. 
+         This indicates to what extent the train schedule varies throughout the week. Table 3 presents the ten largest differences. 
+         Seat capacity in Randstad's major cities varies significantly throughout the week.""")
+st.caption('Table 3: The trajects with the highest difference between the minimum and maximum seat capacity in a week')
+df_difference = pd.read_csv("Max difference capacity.csv")
+st.table(df_difference.head(10))
+
 
 st.header('5. Analysis seat capacity of Sprinters and InterCity’s ')
 st.write("""The NS makes a distinct difference between Sprinters an InterCity trains.
@@ -94,7 +102,7 @@ st.write("""**insert visual**""")
 st.markdown("[Go to 6. Interactive Map](#6-interactive-map)")
 
 
-st.image('Streamlit_report/nog een mooie graph.png')
+st.image('nog een mooie graph.png')
 
 st.markdown("## 6. Interactive Map")
 
