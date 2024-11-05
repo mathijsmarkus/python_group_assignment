@@ -76,14 +76,14 @@ st.write("""It is obvious that on some days there is a higher transport demand t
          Think for example of the difference between a regular workday and a sunday. 
          So it is expected that the capacity of the railway network would reflect that.
          In the interactive streamlit visual it is possible to look at the capacity for each individual day of the week.""") 
-st.write("""**insert visual**""")
 st.markdown("[Go to 6. Interactive Map](#6-interactive-map)")
 
 
-st.write("""In the figure it is clear that the capcity does not show significant differences between monday up to friday, 
-         but there is a visable difference between the work week and the weekend. 
-         To look at these differences in more detail the following graph shows the total capacity for each day of teh week:
-         **grafiek beuenen**""")
+st.write("""In the figure it is clear that the capcity does not show significant differences between Monday up to Friday, 
+         but there is a visable difference between the work week and the weekend. In the map that shows the Monday to Friday, the tracks
+         more red colored than during the weekend.
+         To look at these differences in more detail the following graph shows the total capacity for each day of the week:
+         """)
 
 st.image('Streamlit_report/mooie graph.png')
 
@@ -108,6 +108,7 @@ st.markdown("[Go to 6. Interactive Map](#6-interactive-map)")
 st.image('Streamlit_report/nog een mooie graph.png')
 
 st.markdown("## 6. Interactive Map")
+
 
 # Path to the other .py file
 other_file_path = 'Streamlit_report/map_app_main.py'

@@ -110,10 +110,11 @@ def traintypes_graph():
 #The maximum and minimum differences in seat capacity during the week per traject
 def difference_total_week():
     week = pd.concat([monday, tuesday, wednesday, thursday, friday, saturday, sunday], axis=0)
-
+    counter = 0
     df = []
     for index, row in week.iterrows():
-        print(f'{index+1}/{len(thursday.iloc[0])}', end="\r")
+        print(counter)
+        counter += 1
         From = row['From']
         To = row['To']
             
@@ -147,16 +148,22 @@ def difference_total_week():
     df_sorted = df2.sort_values(by = 'Difference', ascending = False) #Sort the dataframe from high to low
     df_sorted_clean = df_sorted.drop_duplicates()                     #Remove all the duplicate values
     
-    for i in stations['code']:
-        for j in df_sorted_clean['From']:
+    for index1, row1 in stations.iterrows():
+        i = row1['code']
+        name = row1['name_long'] 
+
+        for index2, row2 in df_sorted_clean.iterrows():
+            j = row2['From']
             if i == j:
-                j = i
-        for j in df_sorted_clean['To']:
-            if i == j:
-                j = i
+                df_sorted_clean.at[index2, 'From'] = name        
+            
+            k = row2['To']
+            if i == k:
+                df_sorted_clean.at[index2, 'To'] = name
+    
     df_sorted_clean.to_csv('Max difference capacity.csv', index = False)
 
-difference_total_week
+difference_total_week()
 
 
 #Difference in seat capacity between randstad and non-randstad average

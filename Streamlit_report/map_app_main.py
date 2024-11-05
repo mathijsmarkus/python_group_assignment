@@ -180,10 +180,13 @@ def add_station_marker(m, row):
 # -------------- Main function for Streamlit --------------------
 def main():
     st.subheader("Intensity of Rail Use")
-    st.write("The map below shows the intensity of each piece of rail in The Netherlands. The map is adjustable and \
-        several different options can be selected in the side bar. Different station types can be selected for both \
-            inside as outside of the Randstad area. For the whole week option, different transport providers can be \
-                selected. If a particular day of the week is selected, the map is shown for all providers combined")
+    st.write('''The map below shows the intensity of each piece of rail in The Netherlands. 
+         The map is adjustable and several different options can be selected in the side bar. 
+         Different station types can be selected for both inside as outside of the Randstad area. 
+         For the whole week option, different transport providers can be selected. If a particular day of the week is selected, 
+         the map is shown for all providers combined. In the legend the meaning of the colors are visible. The range of this colors is
+         determined by the maximum, minimum, mean, 1st quarter (25% of the maximum value) and 3rd quarter (75% of the maximum value) of the capacities. So if, for example, the red color in a particular selection
+         is equal to 2804, the maximum seat capacity in that selection is equal to 2,804,000 seats.''')
 
     # Load and process data
     (df_week_all, df_week_interm, df_week_sprinter, 
