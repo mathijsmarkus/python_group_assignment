@@ -477,21 +477,21 @@ def main():
                 font-size: 14px; 
                 margin-top: 10px;">
     <b>Legend</b><br>
-    <i>Seats capacity (x1000)</i><br>
+    <i>Seat capacity (x1000)</i><br>
     <span style="display: flex; justify-content: space-between; padding-left: 10px;">
-        <span><i style="color: #ff0000;">&#9679;</i> Capacity:</span><span>{max_seat}</span>
+        <span><i style="color: #ff0000;">&#9679;</i> Seats:</span><span>{max_seat}</span>
     </span>
     <span style="display: flex; justify-content: space-between; padding-left: 10px;">
-        <span><i style="color: #ff8000;">&#9679;</i> Capacity:</span><span>{fourth_seat_value}</span>
+        <span><i style="color: #ff8000;">&#9679;</i> Seats:</span><span>{fourth_seat_value}</span>
     </span>
     <span style="display: flex; justify-content: space-between; padding-left: 10px;">
-        <span><i style="color: #ffa500;">&#9679;</i> Capacity:</span><span>{median_seat}</span>
+        <span><i style="color: #ffa500;">&#9679;</i> Seats:</span><span>{median_seat}</span>
     </span>
     <span style="display: flex; justify-content: space-between; padding-left: 10px;">
-        <span><i style="color: #ffff00;">&#9679;</i> Capacity:</span><span>{third_seat_value}</span>
+        <span><i style="color: #ffff00;">&#9679;</i> Seats:</span><span>{third_seat_value}</span>
     </span>
     <span style="display: flex; justify-content: space-between; padding-left: 10px;">
-        <span><i style="color: #ffff00;">&#9679;</i> Capacity:</span><span>{min_seat}</span>
+        <span><i style="color: #ffff00;">&#9679;</i> Seats:</span><span>{min_seat}</span>
     </span>
     <i>Stations</i><br>
     <span style="display: flex; justify-content: space-between; padding-left: 10px;">

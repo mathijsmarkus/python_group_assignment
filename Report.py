@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+from Streamlit_report import statistics_report
 
 
 st.title('Group project - TIL6022')
@@ -17,7 +18,7 @@ st.write('Delft, November 5th 2024')
 
 st.header('1. Research objectives')
 
-st.write("""The main research question of this study is:  What are the seat capacities of the train network in the current NS time schedule? 
+st.write("""The main research question of this study is:  What are the seat capacities of the train network in the current NS, Arriva, Keolis and Qbuzz time schedule? 
 
 This question will be answered by answering the following sub-questions: 
 
@@ -62,11 +63,11 @@ st.write("""So, the train services in the Randstad have on average more than thr
 
 df_max = pd.read_csv("Streamlit_report/max_trajectories.csv")  
 st.caption("Tabe 1: Trajectories with highest capacity") 
-st.table(df_max)
+st.dataframe(df_max, use_container_width=True, hide_index=True)
 
 st.caption("Table 2: Trajectories with lowest capacity")
 df_min = pd.read_csv("Streamlit_report/min_trajectories.csv")   
-st.table(df_min)
+st.dataframe(df_min, use_container_width=True, hide_index=True)
 
 st.write("""The trajectories from Table 1 are all situated in the Randstad, while the ones in Table 2 are all outside the randstad.
          This even more accentuates the big differences in these regions""")
@@ -86,29 +87,39 @@ st.write("""In the figure it is clear that the capcity does not show significant
          """)
 
 st.image('Streamlit_report/mooie graph.png')
+st.caption("Figure 1: Variation of the total seat capacity during the week") 
 
 st.write("""Another interesting statistic is the difference in maximum and minimum seat capacity per route during the week. 
          This indicates to what extent the train schedule varies throughout the week. Table 3 presents the ten largest differences. 
          Seat capacity in Randstad's major cities varies significantly throughout the week.""")
-st.caption('Table 3: The trajects with the highest difference between the minimum and maximum seat capacity in a week')
 
+st.caption('Table 3: The trajects with the highest difference between the minimum and maximum seat capacity in a week')
 df_difference = pd.read_csv("Streamlit_report/Max difference capacity.csv")
-st.table(df_difference.head(10))
+st.dataframe(df_difference.head(10), use_container_width=True, hide_index=True)
 
 
 st.header('5. Analysis seat capacity of Sprinters and InterCity’s ')
 st.write("""The NS makes a distinct difference between Sprinters an InterCity trains.
          Sprinter are meant to travel short distances with quick accereration but stop at every small station, 
          while InterCitys are used to transport people between bigger hubs with high speed but skip a lot of smaller stations.
-         But what type of train has the higher capacity? In the figure it shows that...""")
-st.write("""**insert visual**""")
+         But what type of train has the higher capacity? """)
 st.markdown("[Go to 6. Interactive Map](#6-interactive-map)")
 
+st.write('''In the interactive map the capacities for either sprinters and intercity's can be selected. However,
+         precise differences are not visible. In figure 2 the seat capacities per day for all sprinters and intercity's are presented.
+         The figure shows clearly that the seat capacity of all the intercity's is significantly higher than the seat capacity 
+         of all the sprinters. ''')
 
 st.image('Streamlit_report/nog een mooie graph.png')
+st.caption("Figure 2: Difference in capacity between intercity's and sprinters") 
+
+st.write('''This result is supported by the week total and average of both the sprinters and intercity's, which is presented in table 4.''')
+st.caption("Table 4: Week total and average for sprinters and intercity's")
+df = statistics_report.traintypes_avg_total()
+st.dataframe(df, use_container_width=True, hide_index=True)
+
 
 st.markdown("## 6. Interactive Map")
-
 
 # Path to the other .py file
 other_file_path = 'Streamlit_report/map_app_main.py'
@@ -122,7 +133,14 @@ exec(code)
 
 st.header('7. Discussion')
 
-st.write('RNET tussen alphen en gouda is van NS maar staat niet in de database')
+st.write('''In this project the following main question is researched:''') 
+st.write('''*What are the seat capacities of the train network in the current NS time schedule?* ''')
+st.markdown('''This question was studied by gathering and analyzing data from the NS, Keolis, Qbuzz and Arriva and creating an interactive map of all seat capacities. 
+            With this data and the map the subquestions were answered. \n In conclusion, seat capacities are higher for Randstad stations than for non-Randstad stations, higher for week days than for weekend days and higher for intercity's than for sprinters.
+            This is in line with what was expected before the study was performed.
+         
+        
+            RNET tussen alphen en gouda is van NS maar staat niet in de database ''')
 
 st.header('8. Contribution statement')
 

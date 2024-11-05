@@ -75,10 +75,17 @@ def traintypes_avg_total():
         total_sprinter += i
     sprinter_avg = total_sprinter/len(sprinters['Seats'])
 
-    print(f'The total amount of seats per week in intercities is {total_intercity}')
-    print(f'The total amount of seats per week in sprinters is {total_sprinter}')
-    print(f'The average amount of seats per week in intercities is {intercity_avg}')
-    print(f'The average amount of seats per week in sprinters is {sprinter_avg}')
+    types = ['Sprinters', "Intercity's"]
+    total = [total_sprinter, total_intercity ]
+    average = [sprinter_avg, intercity_avg]
+
+    dict1 = {'Train type'   : types,
+             'Total'        : total, 
+             'Average'      : average}
+    df_avg_total = pd.DataFrame(dict1)
+    return df_avg_total
+
+
 
 #Graph of the total seats for sprinters and intercity's vs the day of the week
 def traintypes_graph():
@@ -110,11 +117,8 @@ def traintypes_graph():
 #The maximum and minimum differences in seat capacity during the week per traject
 def difference_total_week():
     week = pd.concat([monday, tuesday, wednesday, thursday, friday, saturday, sunday], axis=0)
-    counter = 0
     df = []
     for index, row in week.iterrows():
-        print(counter)
-        counter += 1
         From = row['From']
         To = row['To']
             
@@ -162,9 +166,6 @@ def difference_total_week():
                 df_sorted_clean.at[index2, 'To'] = name
     
     df_sorted_clean.to_csv('Max difference capacity.csv', index = False)
-
-difference_total_week()
-
 
 #Difference in seat capacity between randstad and non-randstad average
 def difference_randstad():
