@@ -1,3 +1,10 @@
+#In this file, the streamlit interactive map is made. This is done in several steps.
+#1. Functions for loading the data
+#2. Functions for fetching coordinates from data
+#3. Functions to display train lines and stations
+#4. Main function for the rendering of the map and selecting the different options
+
+
 import pandas as pd
 import re
 from pyproj import CRS, Transformer
@@ -11,6 +18,8 @@ import numpy as np
 
 @st.cache_data
 def load_data():
+    # This function loads all the data and puts in in cache to run more efficient
+
     # Define the date range for the week
     date_range = [
         "2024-10-07",  # Monday
@@ -37,8 +46,6 @@ def load_data():
 
     # Load datasets for each provider
     providers = ["Arriva", "Keolis", "NS", "Qbuzz"]
-    
-    # Initialize DataFrames for providers
     provider_dfs_all = {}
     provider_dfs_interm = {}
     provider_dfs_sprinter = {}
@@ -49,7 +56,7 @@ def load_data():
         provider_dfs_sprinter[provider] = pd.read_csv(f"OutputData/PlotDataWeek{provider}sprinters.csv")
 
     # Load dataset for the stations
-    stations = pd.read_csv("Streamlit_data/Randstad-0.0.csv")
+    stations = pd.read_csv("OutputData/Randstad-0.0.csv")
 
     # Unpack data into individual DataFrames
     (df_monday, df_monday_interm, df_monday_sprinter), \
@@ -97,18 +104,11 @@ def process_line_data(df):
     return df.dropna(subset=['latlon_coords']) 
 
 
-# ------------ Functions for train lines and stations  ------------------
+# ------------ Functions to display train lines and stations  ------------------
 
 # Generate a gradient color based on normalized capacity
 def capacity_color(norm_value):
     return colors.to_hex((1, 1 - norm_value, 0))  # Interpolates between yellow (0) and red (1)
-
-# Get color value for specific seat capacity
-def get_color_for_seat_value(seat_value, min_seat, max_seat):
-    if max_seat == min_seat:  
-        return colors.to_hex((1, 0, 0))  # Return red if no variation in data
-    norm_value = (seat_value - min_seat) / (max_seat - min_seat)
-    return capacity_color(norm_value)
 
 # Plot lines and stations
 @st.cache_data
@@ -150,7 +150,7 @@ def add_stations_to_map(m, stations, selected_types, selected_type_codes):
 
     return m
 
-def add_station_marker(m, row):
+def add_station_marker(m, row): 
     # Determine the color based on Randstad type
     color = '#bbbfb5' if row['Randstad'] == 0.0 else '#868a81'
     
@@ -173,7 +173,7 @@ def add_station_marker(m, row):
         fill=True,
         fill_opacity=0,  # Make the clickable area invisible
         popup=row['Station'],
-        weight=row['Type code']  # No border for a seamless look
+        weight=row['Type code']  # No border 
     ).add_to(m)
 
 
@@ -185,7 +185,7 @@ def main():
          Different station types can be selected for both inside as outside of the Randstad area. 
          For the whole week option, different transport providers can be selected. If a particular day of the week is selected, 
          the map is shown for all providers combined. In the legend the meaning of the colors are visible. The range of this colors is
-         determined by the maximum, minimum, mean, 1st quarter (25% of the maximum value) and 3rd quarter (75% of the maximum value) of the capacities. So if, for example, the red color in a particular selection
+         determined by the maximum, 3rd quarter (75% of the maximum value), median, 1st quarter (25% of the maximum value) and the minimum value of the capacities. So if, for example, the red color in a particular selection
          is equal to 2804, the maximum seat capacity in that selection is equal to 2,804,000 seats.''')
 
     # Load and process data
@@ -256,19 +256,20 @@ def main():
 
 
     # Get the initial map center and zoom level (Utrecht coordinates)
-    initial_center = [52.0907, 6.1214]  # Utrecht coordinates
+    initial_center = [52.0907, 6.1214] 
     initial_zoom = 7
 
+    # Sidebar for day/week selection
     days_of_week = [
         'Week', 'Monday', 'Tuesday', 'Wednesday', 
         'Thursday', 'Friday', 'Saturday', 'Sunday'
-    ]
+        ]
     selected_day = st.sidebar.selectbox(
         "Select a day of the week:",
         options=days_of_week,
         index=0,  # Default to 'Week'
-        key="day_selectbox"  # Unique key for the day selectbox
-    )
+        key="day_selectbox"
+        )
 
     # Sidebar for provider selection
     providers = ['All', 'Arriva', 'Keolis', 'NS', 'Qbuzz']
@@ -278,8 +279,8 @@ def main():
             "Select a provider:",
             options=providers,
             index=0,  # Default to 'All'
-            key="provider_selectbox"  # Unique key for the provider selectbox
-        )
+            key="provider_selectbox"
+            )
     else:
         selected_provider = 'All'  # Default to 'All' when a specific day is selected
 
@@ -293,8 +294,8 @@ def main():
         "Select train type:",
         options=train_types,
         index=0,  # Default to 'All' or the only option
-        key="train_type_selectbox"  # Unique key for the train type selectbox
-    )
+        key="train_type_selectbox"
+        )
 
     # Sidebar selection for Randstad types
     station_type = st.sidebar.multiselect(
@@ -302,8 +303,8 @@ def main():
         options=[0.0, 1.0],
         format_func=lambda x: "Randstad" if x == 1.0 else "Non-Randstad",
         default=[],
-        key="station_type_multiselect"  # Unique key for the station type multiselect
-    )
+        key="station_type_multiselect"
+        )
 
     # Sidebar selection for Type codes
     type_code_options = stations['Type code'].unique()  # Get unique Type codes from the stations
@@ -313,7 +314,7 @@ def main():
         format_func=lambda x: "Intercity station" if x == 1.0 else "Sprinter station",
         default=[],
         key="type_code_multiselect"  # Unique key for the type code multiselect
-    )
+        )
 
     # Determine the dataset to use based on selections
     if selected_day == 'Week':
@@ -325,7 +326,6 @@ def main():
 
     # Draw the initial map
     folium_map = draw_map(initial_center, initial_zoom)
-
 
     # For the whole week, data per provider is available
     if selected_day == "Week":
@@ -360,7 +360,7 @@ def main():
                 min_seat = int(eval(f'df_{provider_key}_sprinter')['Seats'].min() // 1000)
                 max_seat = int(eval(f'df_{provider_key}_sprinter')['Seats'].max() // 1000)
 
-    # Handle daily cases
+    # For the days, all options except provider change are possible
     else:
         if selected_day == 'Monday':
             if selected_train_type == 'All':
