@@ -14,7 +14,7 @@ st.image('Streamlit_report/report_front_image.jpg')
 st.write("**Members**")
 st.write("Alene Hooiveld - 5310539   \n Matthijs Markus - 5405416   \n Thijs Daemen - 5289491   \n Niels van der Rijst - 5380162    \n Chris Juárez Overdevest - 5171806")
 
-st.write('Delft, November 5th 2024')
+st.write('Delft, November 7th 2024')
 
 st.header('1. Research objectives')
 
@@ -40,7 +40,7 @@ st.write("""Every day, more than 1 million passengers use the services of the Du
 
 st.write("""To make the python script and visualisations in this report the following steps were taken: **@uitleg pythonstrijders**""")
 
-st.write(""""The results are visualised in a interactive map (chapter 6), this is the main delivearble of this project and all sub-questions are answered by using this map""")
+st.write("""The results are visualised in a interactive map (chapter 6), this is the main delivearble of this project and all sub-questions are answered by using this map""")
 st.markdown("[Go to 6. Interactive Map](#6-interactive-map)")
 
 st.header('3. Analysis seat capacity in- and outside the Randstad ')

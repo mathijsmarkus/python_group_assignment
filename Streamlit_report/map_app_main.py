@@ -1,8 +1,9 @@
 #In this file, the streamlit interactive map is made. This is done in several steps.
-#1. Functions for loading the data
-#2. Functions for fetching coordinates from data
-#3. Functions to display train lines and stations
-#4. Main function for the rendering of the map and selecting the different options
+
+# 1. Functions for loading the data
+# 2. Functions for fetching coordinates from data
+# 3. Functions to display train lines and stations
+# 4. Main function for the rendering of the map and selecting the different options
 
 
 import pandas as pd
@@ -85,7 +86,7 @@ def load_data():
 
 # ------------ Functions for fetching coordinates from data  ------------------
 
-#Extract coordinates from the 'LINESTRING' format
+#Extract coordinates from the 'LINESTRING' format from every datafile with seats capacity
 def extract_coords(geometry_str):
     coords = re.findall(r'(-?\d+\.\d+)\s(-?\d+\.\d+)', geometry_str)
     if not coords:  
