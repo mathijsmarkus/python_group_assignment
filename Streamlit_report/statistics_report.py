@@ -8,7 +8,7 @@ randstad = "Randstad-0.0.csv"
 week_trajectory = 'OutputData/PlotDataWeekall.csv' 
 randstad = "Randstad-0.0.csv"
 week_trajectory = 'PlotDataWeekall.csv' 
-stations = pd.read_csv('../python_group_assignment/stations-2023-09.csv')
+stations = pd.read_csv('stations-2023-09.csv')
 
 monday = pd.read_csv('OutputData/PlotData2024-10-07all.csv', index_col='Unnamed: 0')
 tuesday = pd.read_csv('OutputData/PlotData2024-10-08all.csv', index_col='Unnamed: 0')
