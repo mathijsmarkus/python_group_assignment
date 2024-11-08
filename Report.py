@@ -31,11 +31,17 @@ st.header('2. Introduction')
 st.write("""Every day, more than 1 million passengers use the services of the Dutch national railway company, Nederlandse Spoorwegen (NS). 
          The NS has the concession to run the main rail routes in the Netherlands and operates with 4800 train rides and 260.000 seats per day with Sprinters and Intercity’s. 
          Every year the train schedule is updated and changes are made. Different tracks in the network have different frequencies of train service, which leads to different capacity between cities. 
-         To understand and map those differences this project is set up. With databases from the NS an overview is made of the seat capacity between cities on the main rail route. 
+         To understand and map those differences this project is set up. With databases from the NS, an overview is made of the seat capacity between cities on the main rail route. 
          This data is analysed for differences in capacity between cities in- and outside the Randstad, between days of the week and between Sprinters and Intercity’s. 
          """)
 
-st.write("""To make the python script and visualisations in this report the following steps were taken: **@uitleg pythonstrijders**""")
+st.write("""To make the python script and visualisations in this report the following steps were taken: First, the found datasets with data about every trajectory driven and the train used from 
+         every operator can be loaded. An extra column will be added for the amount of seats, based on the train type and length. Every train has a unique number within the train service (route). 
+         The amount of seats will be stored in a DataFrame corresponding to that train service. Different train services serve the same trajectories. 
+         That is why seats on trajectories that are the same will be added to one another. Now, there is a DataFrame with the total amount of seats for every trajectory within the network.
+         The next step is to plot them on a map. For this, the NS API will be requested for the lines between the stations.
+         This API has information about the complete Dutch railway network, so also from trajectories only driven on by other operators. 
+         Lastly, a color will be assigned for every trajectory, where the one with the most seats is red and the least amount of seats yellow.""")
 
 st.write("""The results are visualised in a interactive map (chapter 6), this is the main delivearble of this project and all sub-questions are answered by using this map""")
 st.markdown("[Go to 6. Interactive Map](#6-interactive-map)")
@@ -149,10 +155,10 @@ st.write('''In the week that the data was derived from (week 41), there were som
             These are summed below:''')
 
 st.markdown('''- Monday up to Thursday: no traffic between Nijverdal/Rijssen and Almelo''')
-st.markdown('''- Whole week: No traffic between Leewarden and Akkrum''')
+st.markdown('''- Whole week: No traffic between Leeuwarden and Akkrum''')
 st.markdown('''- Monday and Tuesday: No traffic between Akkrum and Meppel''')
 st.markdown('''- Saturday and Sunday: No traffic between Harlingen Haven/Stavoren and Leeuwarden''')
-st.markdown('''- Friday up to Sunday: No traffic between Delft Campus and Rotterdam''')
+st.markdown('''- Friday up to Sunday: No traffic between Delft Campus and Rotterdam Central Station''')
 
 st.write('''Lastly, some of the lines on the map where different tracks converge the lines are plotted over each other instead of being added up. 
          This might lead to inconveniences, because it can be difficult to directly determine the capacity for these sections''')     
@@ -164,7 +170,7 @@ st.write('''To conclude this report, the main tasks and resonsibilies are stated
 st.markdown('''- Alene:''')
 st.markdown('''- Matthijs:''')
 st.markdown('''- Thijs:''')
-st.markdown('''- Niels:''')
+st.markdown('''- Niels: Made the Trainservices.csv, filtered non-usable data (bus data Arriva/Qbuzz) from the operator DataFrames, worked on the Final notebook, wrote all comments in the Final notebook''')
 st.markdown('''- Chris: ''')
 
 st.markdown('''
