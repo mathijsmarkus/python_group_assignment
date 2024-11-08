@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from Streamlit_report import statistics_report
 
 
@@ -171,7 +172,7 @@ st.markdown('''- Alene:''')
 st.markdown('''- Matthijs:''')
 st.markdown('''- Thijs:''')
 st.markdown('''- Niels: Made the Trainservices.csv, filtered non-usable data (bus data Arriva/Qbuzz) from the operator DataFrames, worked on the Final notebook, wrote all comments in the Final notebook''')
-st.markdown('''- Chris: ''')
+st.markdown('''- Chris: Partially wrote the report,worked on the storyline, worked on the streamlit implementation, contributed to the interactive map.''')
 
 st.markdown('''
 <style>
