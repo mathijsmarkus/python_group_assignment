@@ -172,7 +172,7 @@ st.write('''To conclude this report, the main tasks and resonsibilies are stated
 
 st.markdown('''- Alene: Wrote the Randstad notebook, statistics_report and partially the report. Made all the graphs and table in the report''')
 st.markdown('''- Mathijs: Set up github repository and corresponding vs-system, worked on streamlit implementation, created the interactive map in streamlit''')
-st.markdown('''- Thijs: Main contributer to the HoofdNotebookFinal''')
+st.markdown('''- Thijs: Did most of the coding in the Final Notebook''')
 st.markdown('''- Niels: Made the Trainservices.csv, filtered non-usable data (bus data Arriva/Qbuzz) from the operator DataFrames, worked on the Final notebook, wrote all comments in the Final notebook''')
 st.markdown('''- Chris: Partially wrote the report,worked on the storyline, worked on the streamlit implementation, contributed to the interactive map.''')
 
