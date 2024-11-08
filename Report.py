@@ -8,6 +8,8 @@ from Streamlit_report import statistics_report
 st.title('Group project - TIL6022')
 st.subheader('Group 6')
 
+st.write('''(*note: to get an interactive version of this report, open the Report.py file and open it by typing 
+         **Streamlit run Report.py** in the terminal, this will open the interactive report on your local server.*)''')
 
 st.image('Streamlit_report/report_front_image.jpg')
 st.caption('(Van Lieshout, 2018, Volkskrant)')
@@ -170,7 +172,7 @@ st.write('''To conclude this report, the main tasks and resonsibilies are stated
 
 st.markdown('''- Alene: Wrote the Randstad notebook, statistics_report and partially the report. Made all the graphs and table in the report''')
 st.markdown('''- Mathijs: Set up github repository and corresponding vs-system, worked on streamlit implementation, created the interactive map in streamlit''')
-st.markdown('''- Thijs:''')
+st.markdown('''- Thijs: Main contributer to the HoofdNotebookFinal''')
 st.markdown('''- Niels: Made the Trainservices.csv, filtered non-usable data (bus data Arriva/Qbuzz) from the operator DataFrames, worked on the Final notebook, wrote all comments in the Final notebook''')
 st.markdown('''- Chris: Partially wrote the report,worked on the storyline, worked on the streamlit implementation, contributed to the interactive map.''')
 
