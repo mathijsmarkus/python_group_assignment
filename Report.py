@@ -169,7 +169,7 @@ st.header('8. Contribution statement')
 st.write('''To conclude this report, the main tasks and resonsibilies are stated for each group memeber:''')
 
 st.markdown('''- Alene:''')
-st.markdown('''- Matthijs:''')
+st.markdown('''- Mathijs: Set up github repository and corresponding vs-system, worked on streamlit implementation, created the interactive map in streamlit''')
 st.markdown('''- Thijs:''')
 st.markdown('''- Niels: Made the Trainservices.csv, filtered non-usable data (bus data Arriva/Qbuzz) from the operator DataFrames, worked on the Final notebook, wrote all comments in the Final notebook''')
 st.markdown('''- Chris: Partially wrote the report,worked on the storyline, worked on the streamlit implementation, contributed to the interactive map.''')
